@@ -1,0 +1,1526 @@
+newmtl ArbolCafe_phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ArbolCafeTextura.jpg
+bump  -bm 1 ArbolCafeNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl MewCuerpo_lambert32SG
+illum 4
+Kd 0.50 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MewOjos_pasted__lambert3SG1
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Mimikyu_Mimikyu_Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Mimikyu_Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl bark
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd bark_b_d.jpg
+map_Ka bark_b_d.jpg
+bump  -bm 0 bark_b_b.jpg
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl cauda_initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.52
+Ks 1.00 1.00 1.00
+Ns 0.06
+newmtl fish_initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.52
+Ks 1.00 1.00 1.00
+Ns 0.06
+newmtl grass
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl groud
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ground.jpg
+map_Ka ground.jpg
+bump  -bm 0 ground_bump.jpg
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl home
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+bump  -bm 1 HouseNM.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl house_1_lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl house_1_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl house_1_lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl icescreamFBXASC032houseSG
+illum 4
+Kd 0.80 0.80 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG2
+illum 4
+Kd 0.48 0.65 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG4
+illum 4
+Kd 0.07 0.46 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG6
+illum 4
+Kd 0.80 0.15 0.15
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG8
+illum 4
+Kd 0.80 0.35 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG10
+illum 4
+Kd 0.40 0.40 0.40
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl icescreamFBXASC032houseSG12
+illum 4
+Kd 0.22 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG14
+illum 4
+Kd 0.06 0.06 0.06
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG16
+illum 4
+Kd 0.44 0.58 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG18
+illum 4
+Kd 0.02 0.01 0.01
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG20
+illum 4
+Kd 0.80 0.80 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl icescreamFBXASC032houseSG22
+illum 4
+Kd 0.04 0.04 0.04
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 4.31
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert5SG
+illum 4
+Kd 0.51 0.15 0.78
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert9SG
+illum 4
+Kd 0.17 0.12 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert32SG
+illum 4
+Kd 0.50 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert35SG
+illum 4
+Kd 0.10 0.35 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert37SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl leaf
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd b_leaf_d.jpg
+map_Ka b_leaf_d.jpg
+bump  -bm 0 b_leaf_b.jpg
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl leaf02
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd b_leaf_d.jpg
+map_Ka b_leaf_d.jpg
+bump  -bm 0 b_leaf_b.jpg
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__anisotropic1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.05 0.24 0.24
+Ni 2.00
+Ks 0.34 0.24 0.24
+newmtl pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__lambert3SG1
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__anisotropic1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.05 0.24 0.24
+Ni 2.00
+Ks 0.34 0.24 0.24
+newmtl pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG10
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG14
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG16
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG10
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG12
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG14
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG16
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG18
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG20
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG32
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG34
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG36
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG38
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG40
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG42
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG44
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG46
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG48
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG50
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG10
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG12
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG14
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG16
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG18
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG40
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG42
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG44
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG46
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG48
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG50
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG52
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG54
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG56
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG58
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG60
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG62
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG64
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG66
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG70
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG72
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG74
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG76
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG78
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG80
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG82
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG84
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG86
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG28
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG30
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG32
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG34
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG36
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG38
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG40
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG42
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG44
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG46
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG48
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG50
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG52
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG54
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG56
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG58
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG60
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG62
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG64
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG66
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG68
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG70
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG72
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG80
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG82
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG84
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG86
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG88
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG90
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG92
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG94
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG96
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG98
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG100
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG10
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG12
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG14
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG16
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG18
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG20
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG22
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG24
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG26
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG28
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG30
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG32
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG34
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG36
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG38
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG40
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG42
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG44
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG46
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG48
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG50
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG54
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG56
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG58
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG60
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG62
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG64
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG66
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG68
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG70
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG72
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG74
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG76
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG78
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG80
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG82
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG84
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG10
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG12
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG14
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG16
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG18
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG20
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG22
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG24
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG26
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG28
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG30
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG32
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG34
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG54
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG56
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG58
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG60
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG62
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG64
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG30
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__Mimikyu_Mimikyu_Mimikyu_lambert3SG34
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pez_initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.52
+Ks 1.00 1.00 1.00
+Ns 0.06
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd DetallesCon2.bmp
+bump  -bm 1 DetallesCon2NM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ExteriorCon2.bmp
+bump  -bm 1 ExteriorCon2.bmp
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd InteriorCon2.bmp
+bump  -bm 1 InteriorCon2NM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd SueloCon.bmp
+bump  -bm 1 SueloConNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TechoCon.bmp
+bump  -bm 1 TechoConNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Cofre.bmp
+bump  -bm 1 CofreNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puente.bmp
+bump  -bm 1 PuenteNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd MapaDeAlturas512.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd grunt_Base_Color.png
+bump  -bm 1 GruntNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd branch_Base_Color.png
+bump  -bm 1 BranchNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd home_hatka_Base_Color.png
+bump  -bm 1 HouseNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Casa.png
+bump  -bm 1 CasaNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong14SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piso.jpg
+bump  -bm 1 PisoNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong15SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd tree001.jpg
+bump  -bm 1 tree001_Normal.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd troe_bark.png
+bump  -bm 1 TroncoNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Hojitas.png
+bump  -bm 1 HojasNM.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl standardSurface2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 0.00
+newmtl stone_black
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd concrete_mask.jpg
+map_Ka stone_black.jpg
+bump  -bm 1 BaseMacetaNM.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl vane1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl wire_027177027
+illum 4
+Kd 0.11 0.69 0.11
+Ka 0.11 0.69 0.11
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.35 0.35 0.35
+Ns 32.00
+newmtl wire_177027088
+illum 4
+Kd 0.69 0.11 0.35
+Ka 0.69 0.11 0.35
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.35 0.35 0.35
+Ns 32.00
+newmtl wire_198224087
+illum 4
+Kd 0.78 0.88 0.34
+Ka 0.78 0.88 0.34
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.35 0.35 0.35
+Ns 32.00
+newmtl wire_214229166
+illum 4
+Kd 0.84 0.90 0.65
+Ka 0.84 0.90 0.65
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.35 0.35 0.35
+Ns 32.00
