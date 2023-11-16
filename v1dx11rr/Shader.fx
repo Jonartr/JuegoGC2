@@ -58,15 +58,15 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 {
 	float4 fColor = float4(1,0,0,1);
 
-    float3 ambient = float3(1.0f, 0.7f, 0.3f);
+    float3 ambient = float3(0.2f, 0.2f, 0.2f);
 
 	float4 text = colorMap.Sample(colorSampler, pix.tex0);
 	float4 text2 = colorMap2.Sample(colorSampler, pix.tex0);
 	float4 alphaBlend = blendMap.Sample(colorSampler, pix.blendTex);
 	float4 textf = (text * alphaBlend) + ((1.0 - alphaBlend) * text2);
 
-	float3 DiffuseDirection = float3(0.5f, -1.0f, 0.0f);
-	float4 DiffuseColor = float4(1.0f, 1.0f, 1.0f, 1.0f);
+	float3 DiffuseDirection = float3(0.5f, -1.0f, 1.0f);
+	float4 DiffuseColor = float4(0.0f, 0.0f, 0.2f, 1.0f);
 
 	float3 diffuse = dot(-DiffuseDirection, pix.normal);
 	diffuse = saturate(diffuse*DiffuseColor.rgb);

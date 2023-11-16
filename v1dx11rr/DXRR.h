@@ -75,9 +75,9 @@ public:
 	float rotacioncamera;
 	float vel, vel2;
 	float rotacioncruz;
-	bool subir_bici = false, sobre_bici = false, mostrar_mensaje = false,entra=false;
-	bool breakpoint;
-	bool is_Walking = false, on_Music = false;
+	bool subir_bici = false, sobre_bici = false, mostrar_mensaje = false,reproduciendo=false;
+	bool breakpoint, sobre_colision = false, near_campfire;
+	bool is_Walking = false, on_Sound = false;
 	int cruces_recogidas = 0;
 	vector2 uv1[32];
 	vector2 uv2[32];
@@ -87,10 +87,13 @@ public:
 	vector2 uvfija;
 
 
-
 	XACTINDEX cueIndex;
 	XACTINDEX walking;
+	XACTINDEX holySound;
+	XACTINDEX campFire;
+
 	CXACT3Util m_XACT3;
+
 
 
 
@@ -110,12 +113,8 @@ public:
 			// Incrementamos el tiempo
 			tiempo += 0.000001;
 		
-		}
+	}
 
-
-
-
-	
     DXRR(HWND hWnd, int Ancho, int Alto)
 	{
 		breakpoint = false;
@@ -143,26 +142,27 @@ public:
 		}
 		camara = new Camara(D3DXVECTOR3(0,0,1), D3DXVECTOR3(0,1,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
 		terreno = new TerrenoRR(512, 512, d3dDevice, d3dContext);
-		skydome = new SkyDome(32, 32, 100.0f, &d3dDevice, &d3dContext, L"cielito.jpg");
+		skydome = new SkyDome(64, 64, 100.0f, &d3dDevice, &d3dContext, L"Noche.jpg");
 		billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
-		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolA/ArbolA.obj", L"MODELOS/Grupo_arboles/tronco2.jpg", L"MODELOS/Grupo_arboles/Tronco2N (3).png", 0, 0);
+		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolA/ArbolA.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0, 0);
 		arbol = new BillboardRR(L"arbol.png", L"NormalMap.png", d3dDevice, d3dContext, 5);
 		Fondo = new BillboardRR(L"Assets/Materiales/bosquecito.jpg", L"NormalMap.png", d3dDevice, d3dContext, 100);
 
 		//========================MODELOS ========================================
 		//COLOCAR COORDENADAS, PORQUE AL CARGAR POR PRIMERA VEZ LA COLISION SERA VERDADERA
 		//Y AL QUERER CARGAR LA POSICION ANTERIOR COMO ESTA ES NULA MARCARA ERROR
-		edificio = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/cottage_obj.obj", L"MODELOS/Casitas/cottage_diffuse.png", L"MODELOS/Casitas/cottage_normal.png", 0, 0);
-		edificio2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/woodenhouse.obj", L"MODELOS/Grupo_arboles/tronco2.jpg", L"MODELOS/Grupo_arboles/Tronco2N (3).png", 0, 0);
-		bicicleta= new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/bike2.obj",L"Rojo.png", L"NormalMap.png", 20, 20);
+		edificio = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/cottage_obj.obj", L"MODELOS/Casitas/cottage_diffuse.png", L"MODELOS/Casitas/cottage_specular.png", 0, 0);
+		edificio2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/woodenhouse.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0, 0);
+
+		bicicleta= new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/bike21.obj",L"MODELOS/Vehiculo/blinn1SG_Base_color.jpg", L"MODELOS/Vehiculo/blinn1SG_SC.jpg", 20, 20);
 		basura = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Basura/TRASH1.obj", L"Gris.png", L"NormalMap.png", 80, 60);
-		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Bosque/ArbolCafeSpec.png", 40, 15);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 40, 15);
 		cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 30, 0);
 		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"Gris.png", L"NormalMap.png", 40, 40);
-		fogata = new ModeloRR(d3dDevice, d3dContext, "MODELOS/campfire/campfire.obj", L"MODELOS/Grupo_arboles/tronco2.jpg", L"MODELOS/Grupo_arboles/Tronco2N (3).png", 0,60);
+		fogata = new ModeloRR(d3dDevice, d3dContext, "MODELOS/campfire/campfire.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0,60);
 		vida = new GUI(d3dDevice, d3dContext, 0.55, 0.35, L"Assets/Materiales/Crucecita.png");
 		
-		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(0.0f,0.0f,0.0f,1.0f));
+		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
 		//========================================================================
 		
 
@@ -324,21 +324,15 @@ public:
 		// //1-05-Fight-Against-Koopa
 		cueIndex = m_XACT3.m_pSoundBank->GetCueIndex("1-28-Beware-the-Forest_s-Mushrooms");
 		walking = m_XACT3.m_pSoundBank->GetCueIndex("StepGrass");
+		holySound = m_XACT3.m_pSoundBank->GetCueIndex("HolySound");
+		campFire = m_XACT3.m_pSoundBank->GetCueIndex("Sonido-De-Fogata");
+	//	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, &pCue1);
+	//	m_XACT3.m_pSoundBank->Prepare(walking, 0, 0, &pCue2);
+	//	pCue1->Play();
 		//cueIndex = m_XACT3.m_pSoundBank->GetCueIndex("1-05-Fight-Against-Koopa");
 		//m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, 0);
 		//m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
-
-		if (is_Walking == true ) {
-			on_Music = true;
-			entra = true;
-			m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
-			
-		}
-		else {
-		//	m_XACT3.m_pSoundBank->Stop(walking, 0);
-		//	on_Music = false;
-		}
-
+		//m_XACT3.m_pSoundBank->Play(campFire, 0, 0, 0);
 
 		return true;			
 		
@@ -369,26 +363,27 @@ public:
 	
 	void Render(void)
 	{
-		rotacioncamera += izqder ;
+		rotacioncamera += izqder;
 		float sphere[3] = { 0,0,0 };
 		float prevPos[3] = { camara->posCam.x, camara->posCam.z, camara->posCam.z };
 		static float angle = 0.0f;
 		angle += 0.01;
 		if (angle >= 360) angle = 0.0f;
 		bool collide = false;
-		if( d3dContext == 0 )
+		if (d3dContext == 0)
 			return;
-	
+
 
 
 		float clearColor[4] = { 0, 0, 0, 1.0f };
-		d3dContext->ClearRenderTargetView( backBufferTarget, clearColor );
-		d3dContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0 );
-		camara->posCam.y = terreno->Superficie(camara->posCam.x, camara->posCam.z) + 7 ;
+		d3dContext->ClearRenderTargetView(backBufferTarget, clearColor);
+		d3dContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		camara->posCam.y = terreno->Superficie(camara->posCam.x, camara->posCam.z) + 7;
 		bool chocan = isPointInsideSphere(camara->getpoint(), fogata->getSphere(7.5));
 		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(10.5));
 		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(10.5));
 		bool crossi = isPointInsideSphere(camara->getpoint(), cruz->getSphere(5.5));
+		bool campiFire = isPointInsideSphere(camara->getpoint(), fogata->getSphere(20.5));
 		//Colisiones antes del updatecam
 			//Al chocar con colision
 		//	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, 0);
@@ -396,7 +391,7 @@ public:
 
 		if (!chocan) {
 			camara->UpdateCam(vel, vel2, arriaba, izqder);
-	
+
 
 		}
 		else {
@@ -408,7 +403,7 @@ public:
 
 		}
 		else {
-	
+
 		}
 
 		if (!bici) {
@@ -426,17 +421,40 @@ public:
 
 		if (!crossi) {
 			camara->UpdateCam(vel, vel2, arriaba, izqder);
-
+			sobre_colision = false;
 		}
 		else {
 			camara->posCam = camara->posCam2;
-		//	cruz->
-			cruces_recogidas++;
+			//	cruz->
+			if (!sobre_colision) {
+				cruces_recogidas++;
+				m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
+				sobre_colision = true;
+			}
+
+			
+			
 		}
 
-		
-		skydome->Update(camara->vista, camara->proyeccion);
+		if (!campiFire) {
+			camara->UpdateCam(vel, vel2, arriaba, izqder);
+			near_campfire = false;
+			m_XACT3.m_pSoundBank->Stop(campFire, 0);
+		}
+		else {
+			camara->posCam = camara->posCam2;
+			if (!near_campfire) {
+				m_XACT3.m_pSoundBank->Play(campFire, 0, 0, 0);
+				near_campfire = true;
+			}
 
+
+
+		}
+
+		TurnOnDepth();
+		skydome->Update(camara->vista, camara->proyeccion);
+		TurnOffDepth();
 		float camPosXZ[2] = { camara->posCam.x, camara->posCam.z };
 
 		TurnOffDepth();
@@ -458,20 +476,12 @@ public:
 		//}
 		//
 		billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
-			0, 60, 0, 2.5, false ,uv1, uv2, uv3, uv4, frameBillboard);
+			0, 60, 0, 2.5, false, uv1, uv2, uv3, uv4, frameBillboard);
 
 		arbol->Draw(camara->vista, camara->proyeccion, camara->posCam,
-		-40, -20, terreno->Superficie(-40,-20), 20, true);
+			-40, -20, terreno->Superficie(-40, -20), 20, true);
 
 
-		//Fondo->Draw(camara->vista, camara->proyeccion, camara->posCam,
-		//	-128, -128,0, 1000, true);
-		//Fondo->Draw(camara->vista, camara->proyeccion, camara->posCam,
-		//	-128, 128,0, 1000, true);
-		//Fondo->Draw(camara->vista, camara->proyeccion, camara->posCam,
-		//	 128, -128, 0, 1000, true);
-		//Fondo->Draw(camara->vista, camara->proyeccion, camara->posCam,
-		//	-128, -128, 0, 1000, true);
 
 		//==========================================================================================================
 		//================CARGAR LOS MODELOS============================
@@ -482,16 +492,12 @@ public:
 
 		edificio->setPosX(-40.0f);
 		edificio->setPosZ(0.0f);
-	 	edificio->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0)  , camara->posCam, 10.0f, 0, 'Z', 1);
+		edificio->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 1);
 
 		edificio2->setPosX(-5.0f);
 		edificio2->setPosZ(0.0f);
 		edificio2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 2.5);
 
-
-
-		//bicicleta->setPosX(-10.0f);
-		//bicicleta->setPosZ(-10.0f);
 
 		if (sobre_bici) {
 			bicicleta->setPosX(camara->posCam.x);
@@ -500,40 +506,35 @@ public:
 		}
 		else {
 			camara->posCam = camara->posCam2;
-		
+
 		}
-
-
 
 		if (sobre_bici) {
-			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) + .25, camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 0.030,true);
+			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 0.70, true);
 		}
 		else {
-	
-			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) + .25, camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.030);
+
+			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.70);
 
 		}
-		
-	
-		
 		basura->setPosX(-25.0f);
 		basura->setPosZ(-25.0f);
-		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) , camara->posCam, 10.0f, 0, 'X', 0.05);
+		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'X', 0.05);
 
 		mesa->setPosX(20.0f);
 		mesa->setPosZ(0.0f);
-		mesa->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) , camara->posCam, 10.0f, 0, 'Z', 0.0045);
+		mesa->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 0.0045);
 
 		cruz->setPosX(30.0f);
 		cruz->setPosZ(0.0f);
-		cruz->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) + 5 , camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		cruz->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
 
 		//enemigo->setPosX(0.0f);
 		//enemigo->setPosZ(40.0f);
-		
-		//seguir_jugador(camara->getpoint(), enemigo->getposition(),enemigo);
-		float x = camara->posCam.x;
-		float z = camara->posCam.z;
+
+	//	seguir_jugador(camara->getpoint(), enemigo->getposition(),enemigo);
+	//	float x = enemigo->getPosX();
+	//	float z = enemigo->getPosZ();
 		enemigo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(enemigo->getPosX(), enemigo->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 1.0, true);
 
 		fogata->setPosX(0.0f);
@@ -544,22 +545,32 @@ public:
 
 		//GUI
 
-       vida->Draw(0.4f, 0.7f);
-       TurnOnAlphaBlending();
+		vida->Draw(0.4f, 0.7f);
+		TurnOnAlphaBlending();
 
-
-	   if (subir_bici && mostrar_mensaje) {
-		   texto->DrawText(-0.75f, -0.10f, "Pulsa E para subirte", 0.03);
-
-		  // texto->DrawText(-0.75f, -0.30f, "True", 0.03);
+	//	texto->DrawText(-0.75f, 0.7f, to_string(x), 0.03);
+	//	texto->DrawText(-0.75f, 0.3f, to_string(z), 0.03);
+		if (subir_bici && mostrar_mensaje) {
+			texto->DrawText(-0.75f, -0.10f, "Pulsa E para subirte", 0.03);
 		}
 
-	   texto->DrawText(-0.75f, -0.20f, to_string(is_Walking), 0.03);
-	   texto->DrawText(-0.75f, -0.40f, to_string(entra), 0.03);
-	   texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
-	   if (is_Walking == true  && entra == true) {
-		   texto->DrawText(-0.75f, -0.10f, "Musica reproducida", 0.03);
-	   }
+
+
+		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
+		if (is_Walking == true) {
+
+			if (!reproduciendo) {
+				m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
+				reproduciendo = true;
+			}
+				
+		}
+		else {
+			m_XACT3.m_pSoundBank->Stop(walking, 0);
+			reproduciendo = false;
+		}
+
+
 		  
       TurnOffAlphaBlending();
 

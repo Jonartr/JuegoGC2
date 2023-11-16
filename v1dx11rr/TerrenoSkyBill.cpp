@@ -184,26 +184,26 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             if (keyboardData[DIK_S] & 0x80) {
                 dxrr->vel = -2.5f;
                 dxrr->is_Walking = true;
-                dxrr->on_Music = true;
+        
             }
             else if (keyboardData[DIK_W] & 0x80) {
                 dxrr->vel = 2.5f;
                 dxrr->is_Walking = true;
-                dxrr->on_Music = true;
+           
             }
             else  if (keyboardData[DIK_A] & 0x80) {
                 dxrr->vel2 = 2.5f;
                 dxrr->is_Walking = true;
-                dxrr->on_Music = true;
+           
             }
             else if (keyboardData[DIK_D] & 0x80) {
                 dxrr->vel2 = -2.5f;
                 dxrr->is_Walking = true;
-                dxrr->on_Music = true;
+           
             }
             else {
                 dxrr->is_Walking = false;
-                dxrr->on_Music = false;
+       
             }
 
 
