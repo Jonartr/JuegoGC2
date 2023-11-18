@@ -372,7 +372,8 @@ public:
 
 	}
 
-	void Draw(D3DXMATRIX vista, D3DXMATRIX proyeccion, float ypos, D3DXVECTOR3 posCam, float specForce, float rot, char angle, float scale, bool seguircamara = false)
+	void Draw(D3DXMATRIX vista, D3DXMATRIX proyeccion, float ypos, D3DXVECTOR3 posCam,
+		float specForce, float rot, char angle, float scale, bool seguircamara = false, bool third_person = false)
 	{
 		static float rotation = 0.0f;
 		rotation += 0.01;
@@ -408,13 +409,11 @@ public:
 		D3DXMatrixRotationYawPitchRoll(&rotationMat, 0.0f, 0.0f, 0.0f);
 		D3DXMATRIX translationMat;
 
-		if (seguircamara) {
-			D3DXMatrixTranslation(&translationMat, posX + 0, ypos, posZ - 2.75);
-		
-		}
-		else {
-			D3DXMatrixTranslation(&translationMat, posX, ypos, posZ);
-		}
+	//D3DXMATRIX seguircamara;
+
+	
+
+
 		
 		if(angle == 'X')
 			D3DXMatrixRotationX(&rotationMat, rot);
@@ -424,8 +423,19 @@ public:
 			D3DXMatrixRotationZ(&rotationMat, rot);
 		viewMatrix *= rotationMat;
 
+
+
 		D3DXMATRIX scaleMat;
 		D3DXMatrixScaling(&scaleMat, scale,scale * 1.65,scale);
+
+
+		if (seguircamara) {
+			D3DXMatrixTranslation(&translationMat, posX + 0, ypos, posZ - 2.75);
+
+		}
+		else {
+			D3DXMatrixTranslation(&translationMat, posX, ypos, posZ);
+		}
 
 		D3DXMATRIX worldMat = rotationMat * scaleMat * translationMat;
 		D3DXMatrixTranspose(&worldMat, &worldMat);

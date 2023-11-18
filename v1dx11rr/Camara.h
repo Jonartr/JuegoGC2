@@ -28,6 +28,7 @@ public:
 		//posicion de la camara
 		posCam = eye;
 		posCam3P = eye;
+		posCam3P.z += 15.0f;
 		//a donde ve
 		hdveo = target;
 		refUp = up;
@@ -52,7 +53,7 @@ public:
 		
 	}
 
-	D3DXMATRIX UpdateCam(float vel,float vel2, float arriaba, float izqder)
+	D3DXMATRIX UpdateCam(float vel,float vel2, float arriaba, float izqder, bool third_person =false)
 	{
 		//Guardamos la wea fome de la wea camara
 
@@ -92,8 +93,21 @@ public:
 		//ajustamos la matriz de vista con lo obtenido
 		posCam += refFront * vel/10.0;
 	 	posCam += refRight * vel2 / 10.0;
-		hdveo = posCam + refFront;
-		D3DXMatrixLookAtLH(&vista, &posCam, &hdveo, &refUp);
+
+
+		posCam3P += refFront * vel / 10.0;
+		posCam3P += refRight * vel2 / 10.0;
+
+		if (!third_person){
+			hdveo = posCam + refFront;
+			D3DXMatrixLookAtLH(&vista, &posCam, &hdveo, &refUp);
+		}
+		else {
+			hdveo = posCam3P + refFront;
+			D3DXMatrixLookAtLH(&vista, &posCam3P, &hdveo, &refUp);
+		}
+
+
 		D3DXMatrixTranspose( &vista, &vista );
 		return vista;
 	}

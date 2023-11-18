@@ -399,7 +399,11 @@ public:
 		float clearColor[4] = { 0, 0, 0, 1.0f };
 		d3dContext->ClearRenderTargetView(backBufferTarget, clearColor);
 		d3dContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 		camara->posCam.y = terreno->Superficie(camara->posCam.x, camara->posCam.z) + 7;
+		camara->posCam3P.y = terreno->Superficie(camara->posCam3P.x, camara->posCam3P.z) + 10;
+
+
 		bool chocan = isPointInsideSphere(camara->getpoint(), fogata->getSphere(5.5));
 		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(10.5));
 		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(10.5));
