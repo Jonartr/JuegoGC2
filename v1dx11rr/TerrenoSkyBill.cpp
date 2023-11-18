@@ -208,25 +208,25 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 
 
-            if (keyboardData[DIK_I] & 0x80) {
-                dxrr->movX += 0.5;
-            }
-            else if (keyboardData[DIK_J] & 0x80) {
-                dxrr->movX -= 0.5;
-            }
-            else  if (keyboardData[DIK_K] & 0x80) {
-                dxrr->movZ += 0.5;
-            }
-            else if (keyboardData[DIK_L] & 0x80) {
-                dxrr->movZ -= 0.5;
-            }
+            //if (keyboardData[DIK_I] & 0x80) {
+            //    dxrr->movX += 0.5;
+            //}
+            //else if (keyboardData[DIK_J] & 0x80) {
+            //    dxrr->movX -= 0.5;
+            //}
+            //else  if (keyboardData[DIK_K] & 0x80) {
+            //    dxrr->movZ += 0.5;
+            //}
+            //else if (keyboardData[DIK_L] & 0x80) {
+            //    dxrr->movZ -= 0.5;
+            //}
 
-            else  if (keyboardData[DIK_Y] & 0x80) {
-                dxrr->movY += 0.5;
-            }
-            else if (keyboardData[DIK_H] & 0x80) {
-                dxrr->movY -= 0.5;
-            }
+            //else  if (keyboardData[DIK_Y] & 0x80) {
+            //    dxrr->movY += 0.5;
+            //}
+            //else if (keyboardData[DIK_H] & 0x80) {
+            //    dxrr->movY -= 0.5;
+            //}
 
 
 
