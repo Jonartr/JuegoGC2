@@ -65,11 +65,11 @@ public:
 	ModeloRR* cruz;
 	ModeloRR* enemigo;
 	ModeloRR* fogata;
+	ModeloRR* Montaña;
 
 	GUI* vida;
 	Text* texto;
-	Text* texto_x;
-	Text* texto_z;
+	Text* Pos;
 	float izqder;
 	float arriaba;
 	float rotacioncamera;
@@ -79,12 +79,16 @@ public:
 	bool breakpoint, sobre_colision = false, near_campfire;
 	bool is_Walking = false, on_Sound = false;
 	int cruces_recogidas = 0;
+
+	float distanciaglobal = 0;
 	vector2 uv1[32];
 	vector2 uv2[32];
 	vector2 uv3[32];
 	vector2 uv4[32];
 
 	vector2 uvfija;
+
+	float movX = 0, movZ = 0, movY = 0;
 
 
 	XACTINDEX cueIndex;
@@ -151,8 +155,8 @@ public:
 		//========================MODELOS ========================================
 		//COLOCAR COORDENADAS, PORQUE AL CARGAR POR PRIMERA VEZ LA COLISION SERA VERDADERA
 		//Y AL QUERER CARGAR LA POSICION ANTERIOR COMO ESTA ES NULA MARCARA ERROR
-		edificio = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/cottage_obj.obj", L"MODELOS/Casitas/cottage_diffuse.png", L"MODELOS/Casitas/cottage_specular.png", 0, 0);
-		edificio2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/woodenhouse.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0, 0);
+		edificio = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/cottage_obj.obj", L"MODELOS/Casitas/cottage_diffuse.png", L"MODELOS/Casitas/cottage_specular.png", -70, 0);
+		edificio2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/woodenhouse.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", -40, -15);
 
 		bicicleta= new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/bike21.obj",L"MODELOS/Vehiculo/blinn1SG_Base_color.jpg", L"MODELOS/Vehiculo/blinn1SG_SC.jpg", 20, 20);
 		basura = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Basura/TRASH1.obj", L"Gris.png", L"NormalMap.png", 80, 60);
@@ -160,9 +164,16 @@ public:
 		cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 30, 0);
 		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"Gris.png", L"NormalMap.png", 40, 40);
 		fogata = new ModeloRR(d3dDevice, d3dContext, "MODELOS/campfire/campfire.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0,60);
+		Montaña = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Montaña/ltb.obj", L"MODELOS/Montaña/Mountain_COL_4096.jpg", L"MODELOS/Montaña/Mountain_REFL_4096.jpg",128 ,240);
+		
+
+
 		vida = new GUI(d3dDevice, d3dContext, 0.55, 0.35, L"Assets/Materiales/Crucecita.png");
 		
+
 		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
+		Pos = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
+
 		//========================================================================
 		
 
@@ -365,6 +376,7 @@ public:
 	{
 		rotacioncamera += izqder;
 		float sphere[3] = { 0,0,0 };
+		float limites1[3] = { 220,220,60 };
 		float prevPos[3] = { camara->posCam.x, camara->posCam.z, camara->posCam.z };
 		static float angle = 0.0f;
 		angle += 0.01;
@@ -379,62 +391,64 @@ public:
 		d3dContext->ClearRenderTargetView(backBufferTarget, clearColor);
 		d3dContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		camara->posCam.y = terreno->Superficie(camara->posCam.x, camara->posCam.z) + 7;
-		bool chocan = isPointInsideSphere(camara->getpoint(), fogata->getSphere(7.5));
+		bool chocan = isPointInsideSphere(camara->getpoint(), fogata->getSphere(1.5));
 		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(10.5));
 		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(10.5));
 		bool crossi = isPointInsideSphere(camara->getpoint(), cruz->getSphere(5.5));
-		bool campiFire = isPointInsideSphere(camara->getpoint(), fogata->getSphere(20.5));
+		bool campiFire = isPointInsideSphere(camara->getpoint(), fogata->getSphere(2.5));
+		bool limites = isPointInsideSphere(camara->getpoint(), limites1);
+		bool casa = isPointInsideSphere(camara->getpoint(), edificio2->getSphere(2.0));
 		//Colisiones antes del updatecam
 			//Al chocar con colision
 		//	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, 0);
 
 
-		if (!chocan) {
-			camara->UpdateCam(vel, vel2, arriaba, izqder);
+		//if (!chocan) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
 
 
-		}
-		else {
-			camara->posCam = camara->posCam2;
-		}
+		//}
+		//else {
+		//	camara->posCam = camara->posCam2;
+		//}
 
-		if (!enemy) {
-			camara->UpdateCam(vel, vel2, arriaba, izqder);
+		//if (!enemy) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
 
-		}
-		else {
+		//}
+		//else {
 
-		}
+		//}
 
-		if (!bici) {
-			camara->UpdateCam(vel, vel2, arriaba, izqder);
-			subir_bici = false;
-			//Al chocar con colision
-		//	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, 0);
+		//if (!bici) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
+		//	subir_bici = false;
+		//	//Al chocar con colision
+		////	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, 0);
 
-		}
-		else {
-			camara->posCam = camara->posCam2;
-			subir_bici = true;
-			mostrar_mensaje = true;
-		}
+		//}
+		//else {
+		//	camara->posCam = camara->posCam2;
+		//	subir_bici = true;
+		//	mostrar_mensaje = true;
+		//}
 
-		if (!crossi) {
-			camara->UpdateCam(vel, vel2, arriaba, izqder);
-			sobre_colision = false;
-		}
-		else {
-			camara->posCam = camara->posCam2;
-			//	cruz->
-			if (!sobre_colision) {
-				cruces_recogidas++;
-				m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
-				sobre_colision = true;
-			}
+		//if (!crossi) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
+		//	sobre_colision = false;
+		//}
+		//else {
+		//	camara->posCam = camara->posCam2;
+		//	//	cruz->
+		//	if (!sobre_colision) {
+		//		cruces_recogidas++;
+		//		m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
+		//		sobre_colision = true;
+		//	}
 
-			
-			
-		}
+		//	
+		//	
+		//}
 
 		if (!campiFire) {
 			camara->UpdateCam(vel, vel2, arriaba, izqder);
@@ -452,9 +466,29 @@ public:
 
 		}
 
-		TurnOnDepth();
+		//if (!limites1) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
+		//
+		//}
+		//else {
+		//	camara->posCam = camara->posCam2;
+
+		//}
+
+		//if (!casa) {
+		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
+
+		//}
+		//else {
+		//	camara->posCam = camara->posCam2;
+
+		//}
+
+		//camara->UpdateCam(vel, vel2, arriaba, izqder);
+
+		//TurnOnDepth();
 		skydome->Update(camara->vista, camara->proyeccion);
-		TurnOffDepth();
+	//	TurnOffDepth();
 		float camPosXZ[2] = { camara->posCam.x, camara->posCam.z };
 
 		TurnOffDepth();
@@ -485,18 +519,14 @@ public:
 
 		//==========================================================================================================
 		//================CARGAR LOS MODELOS============================
-		model->setPosX(30.0f);
-		model->setPosZ(30.0f);
-		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', .25);
+
+		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosZ()), camara->posCam, 10.0f, 0, 'Z', .25);
 
 
-		edificio->setPosX(-40.0f);
-		edificio->setPosZ(0.0f);
-		edificio->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 1);
+		edificio->Draw(camara->vista, camara->proyeccion, terreno->Superficie(edificio->getPosX(), edificio->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 1);
 
-		edificio2->setPosX(-5.0f);
-		edificio2->setPosZ(0.0f);
-		edificio2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 2.5);
+
+		edificio2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(edificio2->getPosX(), edificio2->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 2.5);
 
 
 		if (sobre_bici) {
@@ -527,7 +557,7 @@ public:
 
 		cruz->setPosX(30.0f);
 		cruz->setPosZ(0.0f);
-		cruz->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		cruz->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz->getPosX(), cruz->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
 
 		//enemigo->setPosX(0.0f);
 		//enemigo->setPosZ(40.0f);
@@ -537,9 +567,14 @@ public:
 	//	float z = enemigo->getPosZ();
 		enemigo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(enemigo->getPosX(), enemigo->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 1.0, true);
 
-		fogata->setPosX(0.0f);
-		fogata->setPosZ(60.0f);
-		fogata->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'Z', 2.0);
+	/*	fogata->setPosX(0.0f);
+		fogata->setPosZ(60.0f);*/
+		fogata->Draw(camara->vista, camara->proyeccion, terreno->Superficie(fogata->getPosX(), fogata->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 2.0);
+
+
+
+
+	//	Montaña->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Montaña->getPosX() + movX, Montaña->getPosZ() + movZ) + movY, camara->posCam, 10.0f, 0, 'Y', 0.5);
 
 		//==============================================================
 
@@ -548,8 +583,16 @@ public:
 		vida->Draw(0.4f, 0.7f);
 		TurnOnAlphaBlending();
 
-	//	texto->DrawText(-0.75f, 0.7f, to_string(x), 0.03);
-	//	texto->DrawText(-0.75f, 0.3f, to_string(z), 0.03);
+		texto->DrawText(-0.75f, 0.7f, to_string(camara->posCam.x), 0.03);
+		texto->DrawText(-0.75f, 0.3f, to_string(camara->posCam.z), 0.03);
+		Pos->DrawText(-0.45f, -0.3f, to_string(campiFire), 0.03);
+
+
+		//Pos->DrawText(-0.45f, -0.3f, to_string(camara->posCam2.x), 0.03);
+		//Pos->DrawText(-0.45f, -0.5f, to_string(camara->posCam2.z), 0.03);
+
+		Pos->DrawText(-0.45f, -0.5f, to_string(distanciaglobal), 0.03);
+
 		if (subir_bici && mostrar_mensaje) {
 			texto->DrawText(-0.75f, -0.10f, "Pulsa E para subirte", 0.03);
 		}
@@ -583,6 +626,8 @@ public:
 		float distance = sqrt((point[0] - sphere[0]) * (point[0] - sphere[0]) +
 			(point[1] - sphere[1]) * (point[1] - sphere[1]) 
 		);
+
+		distanciaglobal = distance;
 
 		if (distance < sphere[2]) 
 			collition = true;

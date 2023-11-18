@@ -182,22 +182,22 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             m_pKeyboardDevice->GetDeviceState(sizeof(keyboardData), (void*)&keyboardData);
 
             if (keyboardData[DIK_S] & 0x80) {
-                dxrr->vel = -2.5f;
+                dxrr->vel = -5.f;
                 dxrr->is_Walking = true;
         
             }
             else if (keyboardData[DIK_W] & 0x80) {
-                dxrr->vel = 2.5f;
+                dxrr->vel = 5.f;
                 dxrr->is_Walking = true;
            
             }
             else  if (keyboardData[DIK_A] & 0x80) {
-                dxrr->vel2 = 2.5f;
+                dxrr->vel2 = 5.f;
                 dxrr->is_Walking = true;
            
             }
             else if (keyboardData[DIK_D] & 0x80) {
-                dxrr->vel2 = -2.5f;
+                dxrr->vel2 = -5.f;
                 dxrr->is_Walking = true;
            
             }
@@ -205,6 +205,29 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 dxrr->is_Walking = false;
        
             }
+
+
+
+            if (keyboardData[DIK_I] & 0x80) {
+                dxrr->movX += 0.5;
+            }
+            else if (keyboardData[DIK_J] & 0x80) {
+                dxrr->movX -= 0.5;
+            }
+            else  if (keyboardData[DIK_K] & 0x80) {
+                dxrr->movZ += 0.5;
+            }
+            else if (keyboardData[DIK_L] & 0x80) {
+                dxrr->movZ -= 0.5;
+            }
+
+            else  if (keyboardData[DIK_Y] & 0x80) {
+                dxrr->movY += 0.5;
+            }
+            else if (keyboardData[DIK_H] & 0x80) {
+                dxrr->movY -= 0.5;
+            }
+
 
 
             if (keyboardData[DIK_E] & 0x80 && dxrr->subir_bici == true && dxrr->sobre_bici == false) {
