@@ -12,6 +12,7 @@ class Camara{
 public:
 	D3DXVECTOR3 posCam;
 	D3DXVECTOR3 posCam2;
+	D3DXVECTOR3 posCam3P;
 	D3DXVECTOR3 hdveo;
 	D3DXVECTOR3 hdvoy;
 	D3DXVECTOR3 refUp;
@@ -26,6 +27,7 @@ public:
 	{
 		//posicion de la camara
 		posCam = eye;
+		posCam3P = eye;
 		//a donde ve
 		hdveo = target;
 		refUp = up;

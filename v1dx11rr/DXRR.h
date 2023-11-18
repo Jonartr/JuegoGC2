@@ -60,6 +60,7 @@ public:
 	ModeloRR* edificio;
 	ModeloRR* edificio2;
 	ModeloRR* bicicleta;
+	ModeloRR* bicicleta2;
 	ModeloRR* basura;
 	ModeloRR* mesa;
 	ModeloRR* cruz;
@@ -77,9 +78,10 @@ public:
 	float rotacioncruz;
 	bool subir_bici = false, sobre_bici = false, mostrar_mensaje = false,reproduciendo=false;
 	bool breakpoint, sobre_colision = false, near_campfire;
-	bool is_Walking = false, on_Sound = false, colisiona = false;
+	bool is_Walking = false, on_Sound = false, colisiona = false, sobrecruz = false;
 	int cruces_recogidas = 0;
 
+	float bici2_x = 0, bici2_z = 0;
 	float distanciaglobal = 0;
 	vector2 uv1[32];
 	vector2 uv2[32];
@@ -148,7 +150,7 @@ public:
 		terreno = new TerrenoRR(512, 512, d3dDevice, d3dContext);
 		skydome = new SkyDome(64, 64, 100.0f, &d3dDevice, &d3dContext, L"Noche.jpg");
 		billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
-		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolA/ArbolA.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 50, 80);
+		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 50, 80);
 		arbol = new BillboardRR(L"arbol.png", L"NormalMap.png", d3dDevice, d3dContext, 5);
 		Fondo = new BillboardRR(L"Assets/Materiales/bosquecito.jpg", L"NormalMap.png", d3dDevice, d3dContext, 100);
 
@@ -159,8 +161,11 @@ public:
 		edificio = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/cottage_obj.obj", L"MODELOS/Casitas/cottage_diffuse.png", L"MODELOS/Casitas/cottage_specular.png", -70, 0);
 		edificio2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Casitas/woodenhouse.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", -40, -15);
 
-		bicicleta= new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/biciconmono.obj",L"MODELOS/Vehiculo/blinn1SG_Base_color.jpg", L"MODELOS/Vehiculo/blinn1SG_SC.jpg", 20, 20);
+		bicicleta= new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/bike21.obj",L"MODELOS/Vehiculo/blinn1SG_Base_color.jpg", L"MODELOS/Vehiculo/blinn1SG_SC.jpg", 20, 20);
+		bicicleta2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Vehiculo/biciconmono.obj", L"MODELOS/Vehiculo/blinn1SG_Base_color.jpg", L"MODELOS/Vehiculo/blinn1SG_SC.jpg", 20, 20);
+
 		basura = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Basura/TRASH1.obj", L"Gris.png", L"NormalMap.png", 80, 60);
+
 		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 40, 15);
 		cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 30, 0);
 		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"Gris.png", L"NormalMap.png", 40, 40);
@@ -446,42 +451,39 @@ public:
 			subir_bici = true;
 			mostrar_mensaje = true;
 		}
+		else if (crossi) {
+			sobre_colision = true;
+		}
 
 		if (!colisiona) {
 			camara->UpdateCam(vel, vel2, arriaba, izqder);
+			colisiona = false;
+
 		}
 		else {
 			camara->posCam = camara->posCam2;
 			colisiona = false;
+
 		}
 
-		//if (!bici) {
-		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
-		//	subir_bici = false;
-
-		//}
-		//else {
-		//	camara->posCam = camara->posCam2;
-		//	subir_bici = true;
-		//	mostrar_mensaje = true;
-		//}
-
-		//if (!crossi) {
-		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
-		//	sobre_colision = false;
-		//}
-		//else {
-		//	camara->posCam = camara->posCam2;
-		//	if (!sobre_colision) {
-		//		cruces_recogidas++;
-		//		m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
-		//		sobre_colision = true;
-		//	}
-
-		//}
+		if (!bici) {
+			subir_bici = false;
+			mostrar_mensaje = false;
+		}
 
 
-
+		if (crossi) {
+			if (!sobrecruz) {
+				cruces_recogidas++;
+				m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
+				sobrecruz = true;
+			}
+			
+				
+		}
+		else {
+			sobrecruz = false;
+		}
 
 		//camara->UpdateCam(vel, vel2, arriaba, izqder);
 
@@ -508,14 +510,13 @@ public:
 		//	
 		//}
 		//
+
+
 		billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
 			0, 60, 0, 2.5, false, uv1, uv2, uv3, uv4, frameBillboard);
 
 		arbol->Draw(camara->vista, camara->proyeccion, camara->posCam,
 			-40, -20, terreno->Superficie(-40, -20), 20, true);
-
-
-
 		//==========================================================================================================
 		//================CARGAR LOS MODELOS============================
 
@@ -528,29 +529,24 @@ public:
 		edificio2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(edificio2->getPosX(), edificio2->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 2.5);
 
 
+
 		if (sobre_bici) {
+			bicicleta2->setPosX(camara->posCam.x);
+			bicicleta2->setPosZ(camara->posCam.z);
+
 			bicicleta->setPosX(camara->posCam.x);
 			bicicleta->setPosZ(camara->posCam.z);
+
 			mostrar_mensaje = false;
 		}
-		//else {
-		//		camara->posCam = camara->posCam2;
-		//	
-		//
-
-		//}
 
 		if (sobre_bici) {
-			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 0.70, true);
+			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta2->getPosX(), bicicleta2->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 0.50, true);
 		}
 		else {
-
-			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.70);
+				bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX() +  bici2_x, bicicleta->getPosZ() + bici2_z), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.70);
 
 		}
-
-		bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.70);
-
 
 		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(basura->getPosX(), basura->getPosZ()), camara->posCam, 10.0f, 0, 'X', 0.05);
 		mesa->Draw(camara->vista, camara->proyeccion, terreno->Superficie(mesa->getPosX(), mesa->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 0.0045);
@@ -573,10 +569,10 @@ public:
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
 
-		texto->DrawText(-0.75f, -0.60f, to_string(camara->posCam.x), 0.03);
-		texto->DrawText(-0.75f, -0.40f, to_string(camara->posCam.z), 0.03);
+		texto->DrawText(-0.75f, -0.60f, to_string(crossi), 0.03);
+		texto->DrawText(-0.75f, -0.40f, to_string(sobre_colision), 0.03);
 
-		texto->DrawText(-0.75f, -0.10f, to_string(limites), 0.03);
+
 		if (is_Walking == true) {
 
 			if (!reproduciendo) {
@@ -780,21 +776,3 @@ public:
 
 #endif
 
-//FUNCIONES COMENTADAS
-/*   texto->DrawText(0.55f, 0.7f, "0", 0.015);
-   texto->DrawText(-0.75f, 0.7f, to_string(x), 0.03);
-   texto->DrawText(-0.75f, 0.3f, to_string(z), 0.03);*/
-
-
-   //if (is_Walking) {
-	  // texto->DrawText(-0.75f, 0.7f, "Si se presiona", 0.03);
-	  // if (entra) {
-		 //  texto->DrawText(-0.75f, 0.5f, "Si entra aqui", 0.03);
-	  // }
-   //}
-   //else  {
-	  // texto->DrawText(-0.75f, 0.7f, "No se presiona", 0.03);
-	  // if (entra == false) {
-		 //  texto->DrawText(-0.75f, 0.5f, "No entra aqui", 0.03);
-	  // }
-   //}
