@@ -116,9 +116,15 @@ public:
 	{
 	}
 
-	float* getpoint() {
-
-		float* point = new float[2]{ posCam.x, posCam.z };
+	float* getpoint(bool sobrebici = false) {
+		float* point = NULL;
+		if (sobrebici) {
+			 point = new float[2]{ posCam3P.x, posCam3P.z };
+		}
+		else {
+			 point = new float[2]{ posCam.x, posCam.z };
+		}
+		
 		return point;
 	}
 };

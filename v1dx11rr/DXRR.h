@@ -581,26 +581,26 @@ public:
 		bool crossi6 = false, crossi7 = false, crossi8 = false, crossi9 = false, crossi10 = false;
 
 		if(!grabcruz)
-		 crossi = isPointInsideSphere(camara->getpoint(), cruz->getSphere(5.5));
+		 crossi = isPointInsideSphere(camara->getpoint(sobre_bici), cruz->getSphere(5.5));
 		if (!grabcruz2)
-		 crossi2 = isPointInsideSphere(camara->getpoint(), cruz2->getSphere(5.5));
+		 crossi2 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz2->getSphere(5.5));
 		if (!grabcruz3)
-		 crossi3 = isPointInsideSphere(camara->getpoint(), cruz3->getSphere(5.5));
+		 crossi3 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz3->getSphere(5.5));
 		if (!grabcruz4)
-		 crossi4 = isPointInsideSphere(camara->getpoint(), cruz4->getSphere(5.5));
+		 crossi4 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz4->getSphere(5.5));
 		if (!grabcruz5)
-		 crossi5 = isPointInsideSphere(camara->getpoint(), cruz5->getSphere(5.5));
+		 crossi5 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz5->getSphere(5.5));
 
 		if (!grabcruz6)
-			crossi6 = isPointInsideSphere(camara->getpoint(), cruz6->getSphere(5.5));
+			crossi6 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz6->getSphere(5.5));
 		if (!grabcruz7)
-			crossi7 = isPointInsideSphere(camara->getpoint(), cruz7->getSphere(5.5));
+			crossi7 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz7->getSphere(5.5));
 		if (!grabcruz8)
-			crossi8 = isPointInsideSphere(camara->getpoint(), cruz8->getSphere(5.5));
+			crossi8 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz8->getSphere(5.5));
 		if (!grabcruz9)
-			crossi9 = isPointInsideSphere(camara->getpoint(), cruz9->getSphere(5.5));
+			crossi9 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz9->getSphere(5.5));
 		if (!grabcruz10)
-			crossi10 = isPointInsideSphere(camara->getpoint(), cruz10->getSphere(5.5));
+			crossi10 = isPointInsideSphere(camara->getpoint(sobre_bici), cruz10->getSphere(5.5));
 
 		bool casa2 = isPointInsideSphere(camara->getpoint(), edificio->getSphere(20.0));
 
