@@ -29,6 +29,7 @@ public:
 		//posicion de la camara
 		posCam = eye;
 		posCam3P = eye;
+		posCam3P.y += 15.0f;
 		posCam3P.z -= 15.0f;
 		//a donde ve
 		hdveo = target;

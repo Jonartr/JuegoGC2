@@ -260,7 +260,7 @@ public:
 
 		arbol = new BillboardRR(L"Assets/Billboards/fuego-anim.png", L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
 		Fondo = new BillboardRR(L"Assets/Materiales/bosquecito.jpg", L"NormalMap.png", d3dDevice, d3dContext, 100);
-		fantasma = new BillboardRR(L"Assets/Billboards/preview.png", L"Assets/Billboards/previewNormal.png", d3dDevice, d3dContext, 5);
+		fantasma = new BillboardRR(L"Assets/Billboards/Zombiehand.png", L"Assets/Billboards/ZombiehandN.png", d3dDevice, d3dContext, 0.5);
 
 
 		//========================MODELOS ========================================
@@ -285,7 +285,7 @@ public:
 		 cruz2  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 140, 160);
 		 cruz3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -180, 99);
 		 cruz4  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -125, -200);
-		cruz5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 10, 10);
+		cruz5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 30, 30);
 		cruz6 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -165, -140);
 		cruz7 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -120, 45);
 		cruz8 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -72, 80);
@@ -912,7 +912,7 @@ public:
 
 
 		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
-			Tumba3->getPosX(), Tumba3->getPosZ(), terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()) + 5, 5, true);
+			Tumba3->getPosX(), Tumba3->getPosZ(), terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()), 0.5, true);
 
 		//arbol->Draw(camara->vista, camara->proyeccion, camara->posCam,
 		//	-40, -20, terreno->Superficie(-40, -20), 20, true);
@@ -929,8 +929,8 @@ public:
 
 
 		if (sobre_bici) {
-			bicicleta2->setPosX(camara->posCam.x);
-			bicicleta2->setPosZ(camara->posCam.z);
+			bicicleta2->setPosX(camara->hdveo.x);
+			bicicleta2->setPosZ(camara->hdveo.z);
 
 			bicicleta->setPosX(camara->posCam.x);
 			bicicleta->setPosZ(camara->posCam.z);
@@ -1059,10 +1059,6 @@ public:
 		}
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
-
-
-
-
 
 		TurnOffAlphaBlending();
 
