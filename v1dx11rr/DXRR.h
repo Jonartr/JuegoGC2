@@ -147,6 +147,34 @@ public:
 	bool dianoche = false;
 	bool reinicio_juego = false;
 
+
+	//Posiciona al enemigo en una de las 4 esquinas
+	void set_Posenemigo() {
+		int x = 1 + rand() % (5 - 1);
+
+		switch (x)
+		{
+		case 1:
+			enemigo->setPosXZ(-256, -256);
+
+			break;
+		case 2:
+			enemigo->setPosXZ(-256, 256);
+			break;
+		case 3:
+			enemigo->setPosXZ(256, -256);
+			break;
+		case4:
+			enemigo->setPosXZ(256, 256);
+			break;
+
+		default:
+			break;
+		}
+
+
+	}
+
 	void reiniciar_juego() {
 		//reiniciamos los parametros del juego 
 		subir_bici = false;  sobre_bici = false; mostrar_mensaje = false; reproduciendo = false;
@@ -166,6 +194,7 @@ public:
 
 		camara->posCam.x = 0;
 		camara->posCam.z = 0;
+		set_Posenemigo();
 
 	}
 
@@ -207,6 +236,7 @@ public:
 		vel2 = 0;
 		rotacioncamera = 0;
 		billCargaFuego();
+	
 		uvfija.u = 255.0;
 		uvfija.v = 255.0;
 		camara = new Camara(D3DXVECTOR3(0,80,6), D3DXVECTOR3(0,80,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
@@ -279,7 +309,7 @@ public:
 		inicio_gaming = new Text(d3dDevice, d3dContext, 4.5, 1.5, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//========================================================================
-		
+		set_Posenemigo();
 
 		
 	}
@@ -910,7 +940,7 @@ public:
 
 		if (sobre_bici) {
 			bicicleta2->setTimer(tiempo_dia);
-			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.50, true, true);
+			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta2->getPosX(), bicicleta2->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.50, true, true);
 		}
 		else {
 			bicicleta->setTimer(tiempo_dia);
@@ -983,7 +1013,7 @@ public:
 		enemigo->setTimer(tiempo_dia);
 		if (tiempo_inicio == 0.00) {
 			if (!wingame) {
-		//	seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
+			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
 			}
 		
 		}
