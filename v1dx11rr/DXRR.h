@@ -115,6 +115,7 @@ public:
 	bool camaratipo = false;
 	//Si se agarra una cruz se activa la bandera para que ya no se dibuje
 	bool grabcruz = false, grabcruz2 = false, grabcruz3 = false, grabcruz4 = false, grabcruz5 = false;
+	bool grabcruz6 = false, grabcruz7 = false, grabcruz8 = false, grabcruz9 = false, grabcruz10 = false;
 
 	bool wingame = false;
 
@@ -547,6 +548,7 @@ public:
 		bool enemy_sound = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(50.0));
 		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(5.5));
 		bool crossi = false, crossi2 = false,  crossi3 = false,  crossi4 = false,  crossi5 =false;
+		bool crossi6 = false, crossi7 = false, crossi8 = false, crossi9 = false, crossi10 = false;
 
 		if(!grabcruz)
 		 crossi = isPointInsideSphere(camara->getpoint(), cruz->getSphere(5.5));
@@ -558,6 +560,17 @@ public:
 		 crossi4 = isPointInsideSphere(camara->getpoint(), cruz4->getSphere(5.5));
 		if (!grabcruz5)
 		 crossi5 = isPointInsideSphere(camara->getpoint(), cruz5->getSphere(5.5));
+
+		if (!grabcruz6)
+			crossi6 = isPointInsideSphere(camara->getpoint(), cruz6->getSphere(5.5));
+		if (!grabcruz7)
+			crossi7 = isPointInsideSphere(camara->getpoint(), cruz7->getSphere(5.5));
+		if (!grabcruz8)
+			crossi8 = isPointInsideSphere(camara->getpoint(), cruz8->getSphere(5.5));
+		if (!grabcruz9)
+			crossi9 = isPointInsideSphere(camara->getpoint(), cruz9->getSphere(5.5));
+		if (!grabcruz10)
+			crossi10 = isPointInsideSphere(camara->getpoint(), cruz10->getSphere(5.5));
 
 		bool casa2 = isPointInsideSphere(camara->getpoint(), edificio->getSphere(30.0));
 
@@ -684,7 +697,28 @@ public:
 			grabcruz4 = true;
 		}
 		else if (crossi5) {
-			sobre_colision = true; grabcruz5 = true;
+			sobre_colision = true; 
+			grabcruz5 = true;
+		}
+		else if (crossi6) {
+		sobre_colision = true;
+		grabcruz6 = true;
+		}
+		else if (crossi7) {
+		sobre_colision = true;
+		grabcruz7 = true;
+		}
+		else if (crossi8) {
+		sobre_colision = true;
+		grabcruz8 = true;
+		}
+		else if (crossi9) {
+		sobre_colision = true;
+		grabcruz9 = true;
+		}
+		else if (crossi10) {
+		sobre_colision = true;
+		grabcruz10 = true;
 		}
 		else if (grave1) {
 		colisiona = true;
@@ -728,14 +762,16 @@ public:
 		}
 
 
-		if (crossi || crossi2 || crossi3 || crossi4||crossi5) {
+		if (crossi || crossi2 || crossi3 || crossi4||crossi5
+			|| crossi6 || crossi7 || crossi8 || crossi9 || crossi10
+			) {
 			if (!sobrecruz) {
 				cruces_recogidas++;
 				m_XACT3.m_pSoundBank->Play(holySound, 0, 0, 0);
 				sobrecruz = true;
 			}
 
-			if (cruces_recogidas == 5) {
+			if (cruces_recogidas == 10) {
 				wingame = true;
 				
 			}
@@ -874,7 +910,7 @@ public:
 
 		if (sobre_bici) {
 			bicicleta2->setTimer(tiempo_dia);
-			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PI + 0, 'Y', 0.50, true, true);
+			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.50, true, true);
 		}
 		else {
 			bicicleta->setTimer(tiempo_dia);
@@ -923,12 +959,33 @@ public:
 			cruz5->setTimer(tiempo_dia);
 			cruz5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz5->getPosX(), cruz5->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
 		}
+		if (!grabcruz6) {
+			cruz6->setTimer(tiempo_dia);
+			cruz6->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz6->getPosX(), cruz6->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		}
+		if (!grabcruz7) {
+			cruz7->setTimer(tiempo_dia);
+			cruz7->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz7->getPosX(), cruz7->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		}
+		if (!grabcruz8) {
+			cruz8->setTimer(tiempo_dia);
+			cruz8->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz8->getPosX(), cruz8->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		}
+		if (!grabcruz9) {
+			cruz9->setTimer(tiempo_dia);
+			cruz9->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz9->getPosX(), cruz9->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		}
+		if (!grabcruz10) {
+			cruz10->setTimer(tiempo_dia);
+			cruz10->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz10->getPosX(), cruz10->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
+		}
+
 		enemigo->setTimer(tiempo_dia);
 		if (tiempo_inicio == 0.00) {
 			if (!wingame) {
-	//			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
+			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
 			}
-	//		
+		
 		}
 		enemigo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(enemigo->getPosX(), enemigo->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 1.0, true);
 
@@ -973,11 +1030,6 @@ public:
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
 
-		texto->DrawText(0.55f, 0.7f, to_string(arbol1), 0.03);
-		texto->DrawText(0.55f, 0.5f, to_string(arbol2), 0.03);
-		texto->DrawText(0.55f, 0.3f, to_string(arbol3), 0.03);
-		texto->DrawText(0.55f, 0.1f, to_string(arbol4), 0.03);
-		texto->DrawText(0.55f, -0.1f, to_string(arbol5), 0.03);
 
 
 
