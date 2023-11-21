@@ -56,6 +56,7 @@ public:
 	SkyDome* Noche;
 	BillboardRR *billboard;
 	BillboardRR* arbol;
+	BillboardRR* fantasma;
 	BillboardRR* Fondo;
 	Camara *camara;
 	ModeloRR* model;
@@ -69,11 +70,19 @@ public:
 	ModeloRR* bicicleta2;
 	ModeloRR* basura;
 	ModeloRR* mesa;
+
 	ModeloRR* cruz;
 	ModeloRR* cruz2;
 	ModeloRR* cruz3;
 	ModeloRR* cruz4;
 	ModeloRR* cruz5;
+	ModeloRR* cruz6;
+	ModeloRR* cruz7;
+	ModeloRR* cruz8;
+	ModeloRR* cruz9;
+	ModeloRR* cruz10;
+
+
 	ModeloRR* enemigo;
 	ModeloRR* fogata;
 	ModeloRR* Montaña;
@@ -109,6 +118,8 @@ public:
 
 	bool wingame = false;
 
+
+
 	float bici2_x = 0, bici2_z = 0;
 	float tiempo = 0.001;
 	float tiempo_dia = 0.01;
@@ -141,6 +152,7 @@ public:
 		breakpoint, sobre_colision = false, near_campfire; is_Walking = false; on_Sound = false; colisiona = false;
 		sobrecruz = false; on_Bike = false; reproduciendobike = false; enemysound = false; near_enemy = false;
 		gameover = false; screamer = false;
+		grabcruz = false, grabcruz2 = false, grabcruz3 = false, grabcruz4 = false, grabcruz5 = false;
 		cruces_recogidas = 0;
 		tiempo = 0.001;
 		tiempo_dia = 0.01;
@@ -196,10 +208,6 @@ public:
 		billCargaFuego();
 		uvfija.u = 255.0;
 		uvfija.v = 255.0;
-		for (int i = 0; i <= 10; i++) {
-
-			posrand[i] = dis(gen);
-		}
 		camara = new Camara(D3DXVECTOR3(0,80,6), D3DXVECTOR3(0,80,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
 		terreno = new TerrenoRR(512, 512, d3dDevice, d3dContext);
 		skydome = new SkyDome(32, 32, 100.0f, &d3dDevice, &d3dContext, L"Cielo.jpg");
@@ -208,19 +216,21 @@ public:
 		billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
 		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 50, 80);
 
-		model2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 120, 140);
-		model3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", -220, 180);
-		model4 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 40, 30);
-		model5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 60, -190);
+		model2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolCafe/ArbolCafeTextura.jpg", L"MODELOS/ArbolCafe/ArbolCafeAO.png", 40, -140);
+		model3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolCafe/ArbolCafeTextura.jpg", L"MODELOS/ArbolCafe/ArbolCafeAO.png", -120, 30);
+		model4 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolCafe/ArbolCafeTextura.jpg", L"MODELOS/ArbolCafe/ArbolCafeAO.png", 40, 150);
+		model5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolCafe/ArbolCafeTextura.jpg", L"MODELOS/ArbolCafe/ArbolCafeAO.png", 60, -160);
 		
-		Tumba1 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 60, 190);
-		Tumba2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 60, 140);
-		Tumba3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 60, 110);
-		Tumba4 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 60, 90);
-		Tumba5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 60, 70);
+		Tumba1 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 190, -180);
+		Tumba2 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", 90, -180);
+		Tumba3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", -10,- 180);
+		Tumba4 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", -90, -180);
+		Tumba5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", -150, -180);
 
-		arbol = new BillboardRR(L"Pino.png", L"PinoSC.png", d3dDevice, d3dContext, 5);
+		arbol = new BillboardRR(L"Assets/Billboards/fuego-anim.png", L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
 		Fondo = new BillboardRR(L"Assets/Materiales/bosquecito.jpg", L"NormalMap.png", d3dDevice, d3dContext, 100);
+		fantasma = new BillboardRR(L"Assets/Billboards/preview.png", L"Assets/Billboards/previewNormal.png", d3dDevice, d3dContext, 5);
+
 
 		//========================MODELOS ========================================
 		//COLOCAR COORDENADAS, PORQUE AL CARGAR POR PRIMERA VEZ LA COLISION SERA VERDADERA
@@ -234,12 +244,26 @@ public:
 
 		basura = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Basura/TRASH1.obj", L"Gris.png", L"NormalMap.png", 80, 60);
 
-		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", 40, 15);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
+		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
+
 	    cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -50, -140);
 		 cruz2  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 140, 160);
 		 cruz3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -180, 99);
 		 cruz4  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -125, -200);
-		cruz5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 144, -175);
+		cruz5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 10, 10);
+		cruz6 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -140, -140);
+		cruz7 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 140, 160);
+		cruz8 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -72, 80);
+		cruz9 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -30, -110);
+		cruz10 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 100, 100);
+
+
+
+
 		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"MODELOS/Enemigo/Enemigo-textura.png", L"MODELOS/Enemigo/Enemigo-texturaSC.png", 260, 260);
 		fogata = new ModeloRR(d3dDevice, d3dContext, "MODELOS/campfire/campfire.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 80,110);
 		Montaña = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Montaña/ltb.obj", L"MODELOS/Montaña/Mountain_COL_4096.jpg", L"MODELOS/Montaña/Mountain_REFL_4096.jpg",128 ,240);
@@ -510,6 +534,12 @@ public:
 		bool arbol4 = isPointInsideSphere(camara->getpoint(), model4->getSphere(5.5));
 		bool arbol5 = isPointInsideSphere(camara->getpoint(), model5->getSphere(5.5));
 
+		bool grave1 = isPointInsideSphere(camara->getpoint(), Tumba1->getSphere(5.5));
+		bool grave2 = isPointInsideSphere(camara->getpoint(), Tumba2->getSphere(5.5));
+		bool grave3 = isPointInsideSphere(camara->getpoint(), Tumba3->getSphere(5.5));
+		bool grave4 = isPointInsideSphere(camara->getpoint(), Tumba4->getSphere(5.5));
+		bool grave5 = isPointInsideSphere(camara->getpoint(), Tumba5->getSphere(5.5));
+
 		bool mesaa = isPointInsideSphere(camara->getpoint(), mesa->getSphere(7.5));
 
 		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(5.5));
@@ -566,7 +596,7 @@ public:
 			}
 			screamer = true;
 
-			//	m_XACT3.m_pSoundBank->Play(grito, 0, 0, 0);
+			
 		}
 		else if (casa) {
 			//		camara->UpdateCam(vel, vel2, arriaba, izqder);
@@ -629,6 +659,9 @@ public:
 		else if (arbol5) {
 			colisiona = true;
 		}
+		else if (mesaa) {
+			colisiona = true;
+		}
 		else if (bici) {
 			//camara->UpdateCam(vel, vel2, arriaba, izqder);
 			subir_bici = true;
@@ -653,6 +686,22 @@ public:
 		else if (crossi5) {
 			sobre_colision = true; grabcruz5 = true;
 		}
+		else if (grave1) {
+		colisiona = true;
+		}
+		else if (grave2) {
+		colisiona = true;
+		}
+		else if (grave3) {
+		colisiona = true;
+		}
+		else if (grave4) {
+		colisiona = true;
+		}
+		else if (grave5) {
+		colisiona = true;
+		}
+
 
 
 		if (!colisiona) {
@@ -703,7 +752,7 @@ public:
 			near_enemy = false;
 		}
 
-		if (is_Walking == true && gameover == false) {
+		if (is_Walking == true && gameover == false && wingame == false) {
 
 			if (!reproduciendo) {
 				m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
@@ -717,7 +766,7 @@ public:
 		}
 
 
-		if (on_Bike == true) {
+		if (on_Bike == true && gameover == false && wingame == false) {
 
 			if (!reproduciendobike) {
 				m_XACT3.m_pSoundBank->Play(onbiki, 0, 0, 0);
@@ -731,7 +780,7 @@ public:
 		}
 
 
-		if (near_enemy == true && gameover == false) {
+		if (near_enemy == true && gameover == false && wingame == false) {
 			if (!enemysound) {
 				m_XACT3.m_pSoundBank->Play(risa, 0, 0, 0);
 				enemysound = true;
@@ -787,25 +836,17 @@ public:
 
 		//=====================================ARBOLES============================================================
 
-			model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			model2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			model3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			model4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			model5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-
-
-			Tumba1->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba1->getPosX(), Tumba1->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-
-			Tumba2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba2->getPosX(), Tumba2->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			Tumba3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			Tumba4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba4->getPosX(), Tumba4->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
-			Tumba5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba5->getPosX(), Tumba5->getPosX()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+	
 
 		
 		
 
 		billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
 			fogata->getPosX(), fogata->getPosZ(), terreno->Superficie(fogata->getPosX(), fogata->getPosZ()), 2.5, false, uv1, uv2, uv3, uv4, frameBillboard);
+
+
+		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			Tumba3->getPosX(), Tumba3->getPosZ(), terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()) + 5, 5, true);
 
 		//arbol->Draw(camara->vista, camara->proyeccion, camara->posCam,
 		//	-40, -20, terreno->Superficie(-40, -20), 20, true);
@@ -841,6 +882,20 @@ public:
 
 		}
 
+		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosZ()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+		model2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model2->getPosX(), model2->getPosZ()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+		model3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model3->getPosX(), model3->getPosZ()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+		model4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model4->getPosX(), model4->getPosZ()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+		model5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model5->getPosX(), model5->getPosZ()) - 5, camara->posCam, 10.0f, 0, 'Z', .5);
+
+
+		Tumba1->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba1->getPosX(), Tumba1->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
+
+		Tumba2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba2->getPosX(), Tumba2->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
+		Tumba3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
+		Tumba4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba4->getPosX(), Tumba4->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
+		Tumba5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba5->getPosX(), Tumba5->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
+
 		basura->setTimer(tiempo_dia);
 		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(basura->getPosX(), basura->getPosZ()), camara->posCam, 10.0f, 0, 'X', 0.05);
 
@@ -871,7 +926,7 @@ public:
 		enemigo->setTimer(tiempo_dia);
 		if (tiempo_inicio == 0.00) {
 			if (!wingame) {
-		//		seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
+	//			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
 			}
 	//		
 		}
@@ -917,6 +972,12 @@ public:
 		}
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
+
+		texto->DrawText(0.55f, 0.7f, to_string(arbol1), 0.03);
+		texto->DrawText(0.55f, 0.5f, to_string(arbol2), 0.03);
+		texto->DrawText(0.55f, 0.3f, to_string(arbol3), 0.03);
+		texto->DrawText(0.55f, 0.1f, to_string(arbol4), 0.03);
+		texto->DrawText(0.55f, -0.1f, to_string(arbol5), 0.03);
 
 
 

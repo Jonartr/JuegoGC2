@@ -285,6 +285,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 //reiniciamos parametros nuevamente
                 dxrr->gameover = false;
                 dxrr->reinicio_juego = true;
+                dxrr->wingame = false;
                 
             }
             DIMOUSESTATE mouseData;
