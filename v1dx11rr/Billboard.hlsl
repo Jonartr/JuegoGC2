@@ -27,6 +27,9 @@ struct PS_Input
 {
 	float4 pos : SV_POSITION;
 	float2 tex0 : TEXCOORD0;
+	
+		//Niebla
+    float fogFactor : FOG;
 };
 
 PS_Input VS_Main(VS_Input vertex)
@@ -37,7 +40,14 @@ PS_Input VS_Main(VS_Input vertex)
 	vsOut.pos = mul(vsOut.pos, projMatrix);
 
 	vsOut.tex0 = vertex.tex0;
-
+    float4 vertexPos;
+    vertexPos = vsOut.pos;
+	
+    float fogStart = -10.0f;
+    float fogEnd = 60.0f;
+	
+    float fogFactor = saturate((fogEnd - vertexPos.z) / (fogEnd - fogStart));
+    vsOut.fogFactor = fogFactor;
 
 
 	return vsOut;
@@ -75,6 +85,11 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 	
 		float FALL = dot(normalize(bump), normalize(DirLuz));
 		float4 AportLuzDif = saturate(LuzDifusa * FALL * FAD);
+		
+        float4 fogColor = (0.3f, 0.3f, 0.3f, 0.5f);
+	
+        text += pix.fogFactor * fogColor + (1.0f - pix.fogFactor) * fogColor;
+		
 		text = text * (AportAmb + AportLuzDif );
 		text.a = 1;
 		return text; //* (aportAmb + aportDif);

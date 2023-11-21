@@ -29,7 +29,7 @@ public:
 		//posicion de la camara
 		posCam = eye;
 		posCam3P = eye;
-		posCam3P.z += 15.0f;
+		posCam3P.z -= 15.0f;
 		//a donde ve
 		hdveo = target;
 		refUp = up;
@@ -90,7 +90,6 @@ public:
 		D3DXVec3Transform(&tempo, &refFront, &giraRight);
 		refFront = (D3DXVECTOR3)tempo;
 		D3DXVec3Normalize(&refFront, &refFront);
-	//	D3DXVec3Normalize(&refRight, &refRight);
 
 		//ajustamos la matriz de vista con lo obtenido
 		posCam += refFront * vel/10.0;

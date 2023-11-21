@@ -70,20 +70,43 @@ struct PS_Input
 	float3 normal : NORMAL0;
 	float3 tangent : NORMAL1;
 	float3 binorm : NORMAL2;
+	
+	//Niebla
+    float fogFactor : FOG;
 };
 
 PS_Input VS_Main(VS_Input vertex)
 {
+	
+    float4 vertexPos;
 	PS_Input vsOut = (PS_Input)0;
 	vsOut.pos = mul(vertex.pos, worldMatrix);
 	vsOut.pos = mul(vsOut.pos, viewMatrix);
 	vsOut.pos = mul(vsOut.pos, projMatrix);
+	
+	
+    vertexPos = vsOut.pos;
 
 	vsOut.tex0 = vertex.tex0;
 	vsOut.blendTex = vertex.blendTex;
 	vsOut.normal = normalize(mul(vertex.normal, worldMatrix));
 	vsOut.tangent = normalize(mul(vertex.tangente, worldMatrix));
 	vsOut.binorm = normalize(mul(vertex.binormal, worldMatrix));
+	
+    float fogStart = -10.0f;
+    float fogEnd = 60.0f;
+	
+    float fogFactor = saturate((fogEnd - vertexPos.z) / (fogEnd - fogStart));
+    vsOut.fogFactor = fogFactor;
+	
+	
+    float3 toLight;
+    float distance;
+    float3 lightDirection;
+    float attenuation;
+    float3 pointLightContribution;
+	
+
 
 	return vsOut;
 }
@@ -96,15 +119,15 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
     float3 DiffuseDirection ;
     float4 DiffuseColor;
 	
-    float3 toLight;
-    float distance;
-    float3 lightDirection;
+    //float3 toLight;
+    //float distance;
+    //float3 lightDirection;
     float attenuation;
     float3 pointLightContribution;
     float diffuseFactor;
     float3 diffuseColor;
 
-        ambient = lerp(float3(0.1f, 0.1f, 0.03f), (0.5f, 0.5f, 0.5f), tiempo);
+        ambient = lerp(float3(0.1f, 0.1f, 0.01f), (0.5f, 0.5f, 0.5f), tiempo);
          DiffuseDirection = float3(0.5f, -1.0f, 0.0f);
 	
 		 DiffuseColor = float4(ambient, 1.0f);
@@ -121,30 +144,72 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 	diffuse = saturate(diffuse*DiffuseColor.rgb);
 	diffuse = saturate(diffuse + ambient);
 	
-    //if (Enable == true)
-    //{
-        toLight = CoordPl - pix.pos.xyz;
-        distance = length(toLight);
-        lightDirection = normalize(toLight);
-
-     //Calcular la atenuación basada en la distancia
-        attenuation = saturate(1.0 - distance / Range);
-
-     //Calcular la contribución de la luz puntual
-        pointLightContribution = ColorPl * attenuation;
-
-     //Calcular la componente difusa de la luz puntual
-        diffuseFactor = saturate(dot(pix.normal, lightDirection));
-        diffuseColor = pointLightContribution * DiffuseColor.rgb * diffuseFactor;
-    //}
-    //else
-    //{
-    //    diffuseColor = ambient;
-    //}
+    float3 colorPl = ColorPl;
 	
+    float4 pixelPl = float4(CoordPl,1.0) - pix.pos;
+	
+    float distancia = length(pixelPl);
+	
+    attenuation = saturate(1.0 - distancia / Range);
+    pixelPl /= distancia;
+	
+    float3 pixel2 = pixelPl;
+	
+    float iluminacion = dot(pixel2, pix.normal);
+	
+    if (iluminacion > 0.0f)
+    {
+        fColor += iluminacion * float4(diffuse,1.0f) * attenuation;
 
-	fColor = float4(textf.rgb * diffuse, 1.0f);
-    fColor.rgb += diffuseColor;
+    }
+
+        fColor = float4(textf.rgb * diffuse, 1.0f);
+   
+
+    float4 fogColor =  (0.3f, 0.3f, 0.3f,0.5f);
+	
+    fColor += pix.fogFactor * fogColor + (1.0f - pix.fogFactor) * fogColor;
 
     return fColor;
 }
+
+    //
+    //float RangePl : PointLight;
+    //float3 lightDirpl : PointLight1;
+    //float3 PosPL : PointLight2;
+
+
+
+ ////   //if (Enable == true)
+ ////   //{
+ ////       toLight = CoordPl - pix.pos.xyz;
+ ////       distance = length(toLight);
+ ////       lightDirection = normalize(toLight);
+
+ ////    //Calcular la atenuación basada en la distancia
+ ////       attenuation = saturate(1.0 - distance / Range);
+
+ ////    //Calcular la contribución de la luz puntual
+ //   pointLightContribution = ColorPl * pix.RangePl;
+	
+ //   pix.lightDirpl = normalize(pix.lightDirpl);
+
+ //    //Calcular la componente difusa de la luz puntual
+ //   diffuseFactor = saturate(dot(pix.normal, pix.lightDirpl));
+ //   diffuseColor = pointLightContribution * DiffuseColor.rgb * diffuseFactor;
+ ////   //}
+ ////   //else
+ ////   //{
+ ////   //    diffuseColor = ambient;
+ ////   //}
+ //   fColor.rgb += diffuseColor;
+
+	
+ //   toLight = CoordPl - vertexPos.z;
+ //   distance = length(toLight);
+	//vsOut.lightDirpl = lightDirection = normalize(toLight);
+ //   attenuation = saturate(1.0 - distance / Range);
+	
+ //   vsOut.PosPL = CoordPl - vertexPos.z;
+	
+ //   vsOut.RangePl = attenuation;

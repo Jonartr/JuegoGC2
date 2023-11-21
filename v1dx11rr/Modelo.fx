@@ -75,18 +75,25 @@ struct PS_Input
 	float specForce : TEXCOORD3;
     //float3 pointLight : TEXCOORD4;
     //float range : TEXCOORD5;
+	
+		//Niebla
+    float fogFactor : FOG;
 };
 
 PS_Input VS_Main(VS_Input vertex)
 {
 	
 	float4 worldPosition;
+	
+    float4 vertexPos;
 
 		PS_Input vsOut = (PS_Input)0;
 
 		vsOut.pos = mul(vertex.pos, worldMatrix);
 		vsOut.pos = mul(vsOut.pos, viewMatrix);
 		vsOut.pos = mul(vsOut.pos, projMatrix);
+	
+		vertexPos = vsOut.pos;
 
 		vsOut.tex0 = vertex.tex0;
 		vsOut.normal = normalize(mul(vertex.normal, worldMatrix));
@@ -98,6 +105,12 @@ PS_Input VS_Main(VS_Input vertex)
 		vsOut.campos = normalize(vsOut.campos);
 
 		vsOut.specForce = specForce;
+	
+    float fogStart = -10.0f;
+    float fogEnd = 50.0f;
+	
+    float fogFactor = saturate((fogEnd - vertexPos.z) / (fogEnd - fogStart));
+    vsOut.fogFactor = fogFactor;
 	
     //vsOut.pointLight = CoordPl.xyz - worldPosition.xyz;
 	
@@ -132,10 +145,10 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 	
 	
         textureColor = colorMap.Sample(colorSampler, pix.tex0);
-		 daycolor = lerp(float3(0.1f, 0.1f, 0.03f), (0.5f, 0.5f, 0.5f), timer);
+		 daycolor = lerp(float3(0.1f, 0.1f, 0.1f), (0.5f, 0.5f, 0.5f), timer);
 		color = float4(daycolor, 1.10); // ambient color
 
-		dayspecular = lerp(float3(0.1f, 0.1f, 0.3f), (0.5f, 0.5f, 0.5f), timer);	
+		dayspecular = lerp(float3(0.1f, 0.1f, 0.1f), (0.5f, 0.5f, 0.5f), timer);	
 		specular = float4(dayspecular, 1.0); //specular color
         specularMap = specMap.Sample(colorSampler, pix.tex0);
 	
@@ -182,6 +195,10 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 
     color = color * textureColor;
     color = saturate(color + finalSpec);
+	
+    float4 fogColor = (0.3f, 0.3f, 0.3f, 0.5f);
+	
+    color += pix.fogFactor * fogColor + (1.0f - pix.fogFactor) * fogColor;
 
     return color;
 }

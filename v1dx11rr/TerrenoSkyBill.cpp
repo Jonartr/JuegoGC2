@@ -181,47 +181,54 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             char keyboardData[256];
             m_pKeyboardDevice->GetDeviceState(sizeof(keyboardData), (void*)&keyboardData);
 
-            if (dxrr->gameover == false) {
+            if ((dxrr->gameover == false || dxrr->wingame == true)&& dxrr->tiempo_inicio == 0 ) {
                 if (keyboardData[DIK_S] & 0x80) {
-                    dxrr->vel = -5.f;
+                 
                     if (dxrr->sobre_bici) {
                         dxrr->on_Bike = true;
+                        dxrr->vel = -6.f;
                     }
                     else {
                         dxrr->is_Walking = true;
                         dxrr->on_Bike = false;
+                        dxrr->vel = -4.f;
                     }
 
 
                 }
                 else if (keyboardData[DIK_W] & 0x80) {
-                    dxrr->vel = 5.f;
+                 
                     if (dxrr->sobre_bici) {
                         dxrr->on_Bike = true;
+                        dxrr->vel = 6.f;
                     }
                     else {
                         dxrr->is_Walking = true;
-
+                        dxrr->vel = 4.f;
                     }
 
                 }
                 else  if (keyboardData[DIK_A] & 0x80) {
-                    dxrr->vel2 = 5.f;
+                 
                     if (dxrr->sobre_bici) {
+                        dxrr->vel2 = 6.f;
                         dxrr->on_Bike = true;
                     }
                     else {
                         dxrr->is_Walking = true;
+                        dxrr->vel2 = 4.f;
                     }
 
                 }
                 else if (keyboardData[DIK_D] & 0x80) {
-                    dxrr->vel2 = -5.f;
+                  
                     if (dxrr->sobre_bici) {
                         dxrr->on_Bike = true;
+                        dxrr->vel2 = -6.f;
                     }
                     else {
                         dxrr->is_Walking = true;
+                        dxrr->vel2 = -4.f;
                     }
 
                 }

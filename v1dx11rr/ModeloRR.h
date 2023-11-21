@@ -123,6 +123,11 @@ public:
 		this->posZ = posZ;
 	}
 
+	void setPosXZ(float posX, float posZ) {
+		this->posX = posX;
+		this->posZ = posZ;
+	}
+
 	void setTimer(float time) {
 		this->timer = time;
 	}
@@ -517,7 +522,9 @@ public:
 
 	    D3DXMATRIX seguir_camara;
 		if (third_person) {
-			D3DXMatrixTranslation(&seguir_camara, posX, ypos, posZ - 10);
+			D3DXMatrixTranslation(&seguir_camara, 1.0, 0.0, 7.75);
+
+			
 		}
 		else {
 			D3DXMatrixTranslation(&seguir_camara, 0.0, 0.0, 0.0);
@@ -541,7 +548,7 @@ public:
 
 		if (seguircamara) {
 
-			worldMat = rotationMat * seguir_camara *scaleMat * translationMat;
+			worldMat = rotationMat * seguir_camara * scaleMat * translationMat;
 		}
 
 	

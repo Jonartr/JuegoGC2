@@ -82,7 +82,7 @@ public:
 		this->ancho = ancho;
 		this->alto = alto;
 		//aqui cargamos las texturas de alturas y el cesped
-		CargaParametros(L"grassforest.jpg", L"heightmap.png",50.0f);
+		CargaParametros(L"183.jpg", L"heightmap.png",50.0f);
 	}
 
 	~TerrenoRR()
