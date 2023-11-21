@@ -251,13 +251,13 @@ public:
 		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
 		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/Mesa/texture_pinoSC.png", -140, 55);
 
-	    cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -50, -140);
+	    cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -50, 110);
 		 cruz2  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 140, 160);
 		 cruz3 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -180, 99);
 		 cruz4  = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -125, -200);
 		cruz5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 10, 10);
-		cruz6 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -140, -140);
-		cruz7 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 140, 160);
+		cruz6 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -165, -140);
+		cruz7 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -120, 45);
 		cruz8 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -72, 80);
 		cruz9 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", -30, -110);
 		cruz10 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 100, 100);
@@ -274,7 +274,7 @@ public:
 		Wingui = new GUI(d3dDevice, d3dContext, 3, 3, L"Win.jpg");
 
 
-		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
+		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,0.0f,1.0f,1.0f));
 		gameovertext = new Text(d3dDevice, d3dContext, 8, 2.65, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		inicio_gaming = new Text(d3dDevice, d3dContext, 4.5, 1.5, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -572,9 +572,9 @@ public:
 		if (!grabcruz10)
 			crossi10 = isPointInsideSphere(camara->getpoint(), cruz10->getSphere(5.5));
 
-		bool casa2 = isPointInsideSphere(camara->getpoint(), edificio->getSphere(30.0));
+		bool casa2 = isPointInsideSphere(camara->getpoint(), edificio->getSphere(20.0));
 
-		bool casa = isPointInsideSphere(camara->getpoint(), edificio2->getSphere(30.0));
+		bool casa = isPointInsideSphere(camara->getpoint(), edificio2->getSphere(20.0));
 
 		bool limites = isPointInsideSphere(camara->getpoint(), limite1);
 		bool limites2 = isPointInsideSphere(camara->getpoint(), limite2);
@@ -983,7 +983,7 @@ public:
 		enemigo->setTimer(tiempo_dia);
 		if (tiempo_inicio == 0.00) {
 			if (!wingame) {
-			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
+		//	seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
 			}
 		
 		}
