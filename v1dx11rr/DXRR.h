@@ -11,6 +11,7 @@
 #include "ModeloRR.h"
 #include "XACT3Util.h"
 #include <random>
+#include <cmath>
 
 #include "GUI.h"
 #include "Text.h"
@@ -20,7 +21,7 @@ std::mt19937 gen(rd());
 std::uniform_real_distribution<float> dis(-200.0f, 200.0f);
 float posrand[100];
 
-float tiempo=0.001 ;
+
 
 class DXRR{	
 
@@ -52,6 +53,7 @@ public:
 
 	TerrenoRR *terreno;
 	SkyDome *skydome;
+	SkyDome* Noche;
 	BillboardRR *billboard;
 	BillboardRR* arbol;
 	BillboardRR* Fondo;
@@ -68,9 +70,13 @@ public:
 	ModeloRR* fogata;
 	ModeloRR* Montaña;
 
+	ModeloRR* settiempo;
+
 	GUI* vida;
+	GUI* gogui;
 	Text* texto;
-	Text* Pos;
+	Text* inicio_gaming;
+	Text* gameovertext;
 	float izqder;
 	float arriaba;
 	float rotacioncamera;
@@ -79,29 +85,60 @@ public:
 	bool subir_bici = false, sobre_bici = false, mostrar_mensaje = false,reproduciendo=false;
 	bool breakpoint, sobre_colision = false, near_campfire;
 	bool is_Walking = false, on_Sound = false, colisiona = false, sobrecruz = false;
+	bool on_Bike = false, reproduciendobike = false;
+	bool enemysound = false,  near_enemy = false;
+	bool gameover = false, screamer = false;
 	int cruces_recogidas = 0;
+	bool camaratipo = false;
+
+	bool wingame = false;
 
 	float bici2_x = 0, bici2_z = 0;
+	float tiempo = 0.001;
+	float tiempo_dia = 0.01;
 	float distanciaglobal = 0;
+	float tiempo_inicio = 0.06;
 	vector2 uv1[32];
 	vector2 uv2[32];
 	vector2 uv3[32];
 	vector2 uv4[32];
-
 	vector2 uvfija;
 
 	float movX = 0, movZ = 0, movY = 0;
-
 
 	XACTINDEX cueIndex;
 	XACTINDEX walking;
 	XACTINDEX holySound;
 	XACTINDEX campFire;
+	XACTINDEX risa;
+	XACTINDEX grito;
+	XACTINDEX onbiki;
 
 	CXACT3Util m_XACT3;
 
+	bool dianoche = false;
+	bool reinicio_juego = false;
 
+	void reiniciar_juego() {
+		//reiniciamos los parametros del juego 
+		subir_bici = false;  sobre_bici = false; mostrar_mensaje = false; reproduciendo = false;
+		breakpoint, sobre_colision = false, near_campfire; is_Walking = false; on_Sound = false; colisiona = false;
+		sobrecruz = false; on_Bike = false; reproduciendobike = false; enemysound = false; near_enemy = false;
+		gameover = false; screamer = false;
+		cruces_recogidas = 0;
+		tiempo = 0.001;
+		tiempo_dia = 0.01;
+		distanciaglobal = 0;
+	    tiempo_inicio = 0.06;
+		enemigo->setPosX(260);
+		enemigo->setPosZ(260);
 
+		reinicio_juego = false;
+
+		camara->posCam.x = 0;
+		camara->posCam.z = 0;
+
+	}
 
 	void seguir_jugador(float* jugadorPos, float* enemigoPos, ModeloRR * enemyPos) {
 			float posicionInicial = enemigoPos[0];
@@ -116,8 +153,12 @@ public:
 			enemyPos->setPosX(newPosx);
 			enemyPos->setPosZ(newPosz);
 
+			//Si esta a una distancia minima se reproduce un audio de advertencia
+			//de enemigo cerca
+
+
 			// Incrementamos el tiempo
-			tiempo += 0.000001;
+			tiempo += 0.0000002;
 		
 	}
 
@@ -146,9 +187,11 @@ public:
 
 			posrand[i] = dis(gen);
 		}
-		camara = new Camara(D3DXVECTOR3(0,0,1), D3DXVECTOR3(0,1,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
+		camara = new Camara(D3DXVECTOR3(0,80,6), D3DXVECTOR3(0,80,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
 		terreno = new TerrenoRR(512, 512, d3dDevice, d3dContext);
-		skydome = new SkyDome(64, 64, 100.0f, &d3dDevice, &d3dContext, L"Noche.jpg");
+		skydome = new SkyDome(64, 64, 100.0f, &d3dDevice, &d3dContext, L"cielito.jpg");
+		Noche = new SkyDome(64, 64, 100.0f, &d3dDevice, &d3dContext, L"Noche.jpg");
+
 		billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
 		model = new ModeloRR(d3dDevice, d3dContext, "MODELOS/ArbolCafe/ArbolCafe.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeTexturaSPEC.jpg", 50, 80);
 		arbol = new BillboardRR(L"arbol.png", L"NormalMap.png", d3dDevice, d3dContext, 5);
@@ -168,13 +211,16 @@ public:
 
 		mesa = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Mesa/wood_bench.obj", L"MODELOS/Mesa/texture_pino.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 40, 15);
 		cruz = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Cruz/Cross2.obj", L"MODELOS/Cruz/tex/CIMG0212 tiles.jpg", L"MODELOS/Cruz/tex/cross specular color.png", 30, 0);
-		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"Gris.png", L"NormalMap.png", 40, 40);
+		enemigo = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Enemigo/kodama.obj", L"MODELOS/Enemigo/Enemigo-textura.png", L"MODELOS/Enemigo/Enemigo-texturaSC.png", 260, 260);
 		fogata = new ModeloRR(d3dDevice, d3dContext, "MODELOS/campfire/campfire.obj", L"MODELOS/ArbolA/ArbolCafeTextura.jpg", L"MODELOS/ArbolA/ArbolCafeNM.png", 0,60);
 		Montaña = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Montaña/ltb.obj", L"MODELOS/Montaña/Mountain_COL_4096.jpg", L"MODELOS/Montaña/Mountain_REFL_4096.jpg",128 ,240);
 		
 		vida = new GUI(d3dDevice, d3dContext, 0.55, 0.35, L"Assets/Materiales/Crucecita.png");
+		gogui = new GUI(d3dDevice, d3dContext, 3, 3, L"fondogameover.png");
+
 		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
-		Pos = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
+		gameovertext = new Text(d3dDevice, d3dContext, 8, 2.65, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
+		inicio_gaming = new Text(d3dDevice, d3dContext, 4.5, 1.5, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//========================================================================
 		
@@ -339,6 +385,10 @@ public:
 		walking = m_XACT3.m_pSoundBank->GetCueIndex("StepGrass");
 		holySound = m_XACT3.m_pSoundBank->GetCueIndex("HolySound");
 		campFire = m_XACT3.m_pSoundBank->GetCueIndex("Sonido-De-Fogata");
+
+		onbiki = m_XACT3.m_pSoundBank->GetCueIndex("Bici");
+		risa = m_XACT3.m_pSoundBank->GetCueIndex("Risas");
+		grito = m_XACT3.m_pSoundBank->GetCueIndex("Grito");
 	//	m_XACT3.m_pSoundBank->Play(cueIndex, 0, 0, &pCue1);
 	//	m_XACT3.m_pSoundBank->Prepare(walking, 0, 0, &pCue2);
 	//	pCue1->Play();
@@ -376,18 +426,35 @@ public:
 	
 	void Render(void)
 	{
+
+		if (reinicio_juego) {
+			reiniciar_juego();
+		}
 		rotacioncamera += izqder;
+
+		if (rotacioncamera >= 6.0 || rotacioncamera <= -6.0) {
+			rotacioncamera = 0.0;
+		}
 		float sphere[3] = { 0,0,0 };
-		float limite1[3] = { -224,280,60 };
-		float limite2[3] = { -274,280 ,60 };
-		float limite3[3] = { -124,280,60 };
-		float limite4[3] = { -74,280,60 };
-		float limite5[3] = { -24,280,60 };
-		float limite6[3] = { 34,280,60 };
-		float limite7[3] = { 84,280 ,60 };
-		float limite8[3] = { 134,280,60 };
-		float limite9[3] = { 184,280,60 };
-		float limite10[3] = { 234,280,60 };
+							// X   Z   R
+		float limite1[3] = { 100,520,300 };
+		float limite2[3] = {  -100, 520 ,300 };
+
+
+		float limite5[3] = { 100, -520,300 };
+		float limite6[3] = { -100, -520 ,300 };
+
+		float limite3[3] = { -520,100,300 };
+		float limite4[3] = { -520,-100,300 };
+
+		float limite7[3] = { 520, 100,300 };
+		float limite8[3] = { 520,-100,300 };
+
+		float limite9[3] = { -256, 256 ,50 };
+		float limite10[3] = { 256, 256 ,50 };
+		float limite11[3] = { -256,256,50 };
+		float limite12[3] = { -256,-256,50 };
+
 		float prevPos[3] = { camara->posCam.x, camara->posCam.z, camara->posCam.z };
 		static float angle = 0.0f;
 		angle += 0.01;
@@ -405,17 +472,25 @@ public:
 
 
 		bool chocan = isPointInsideSphere(camara->getpoint(), fogata->getSphere(5.5));
-		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(10.5));
-		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(10.5));
+		bool enemy = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(5.5));
+		bool enemy_sound = isPointInsideSphere(camara->getpoint(), enemigo->getSphere(50.0));
+		bool bici = isPointInsideSphere(camara->getpoint(), bicicleta->getSphere(5.5));
 		bool crossi = isPointInsideSphere(camara->getpoint(), cruz->getSphere(5.5));
+		bool casa = isPointInsideSphere(camara->getpoint(), edificio2->getSphere(5.0));
+
 		bool limites = isPointInsideSphere(camara->getpoint(), limite1);
 		bool limites2 = isPointInsideSphere(camara->getpoint(), limite2);
 		bool limites3 = isPointInsideSphere(camara->getpoint(), limite3);
 		bool limites4 = isPointInsideSphere(camara->getpoint(), limite4);
 		bool limites5 = isPointInsideSphere(camara->getpoint(), limite5);
-		bool casa = isPointInsideSphere(camara->getpoint(), edificio2->getSphere(20.0));
+		bool limites6 = isPointInsideSphere(camara->getpoint(), limite6);
+		bool limites7 = isPointInsideSphere(camara->getpoint(), limite7);
+		bool limites8 = isPointInsideSphere(camara->getpoint(), limite8);
 
-
+		bool limites9 = isPointInsideSphere(camara->getpoint(), limite9);
+		bool limites10 = isPointInsideSphere(camara->getpoint(), limite10);
+		bool limites11 = isPointInsideSphere(camara->getpoint(), limite11);
+		bool limites12 = isPointInsideSphere(camara->getpoint(), limite12);
 
 		//Colisiones antes del updatecam
 			//Al chocar con colision
@@ -428,7 +503,15 @@ public:
 		}
 		else  if (enemy) {
 		//	camara->UpdateCam(vel, vel2, arriaba, izqder);
-			colisiona = true;
+			//colisiona = true;
+			gameover = true;
+			
+			if (!screamer) {
+		//		m_XACT3.m_pSoundBank->Play(grito, 0, 0, 0);
+			}
+			screamer = true;
+			
+		//	m_XACT3.m_pSoundBank->Play(grito, 0, 0, 0);
 		}
 		else if (casa) {
 	//		camara->UpdateCam(vel, vel2, arriaba, izqder);
@@ -450,6 +533,28 @@ public:
 		else if (limites5) {
 			colisiona = true;
 		}
+		else if (limites6) {
+			colisiona = true;
+		}
+		else if (limites7) {
+			colisiona = true;
+		}
+		else if (limites8) {
+			colisiona = true;
+		}
+		else if (limites9) {
+			colisiona = true;
+		}
+		else if (limites10) {
+			colisiona = true;
+		}
+		else if (limites11) {
+			colisiona = true;
+		}
+		else if (limites12) {
+			colisiona = true;
+		}
+
 		else if (bici) {
 			//camara->UpdateCam(vel, vel2, arriaba, izqder);
 			subir_bici = true;
@@ -460,12 +565,19 @@ public:
 		}
 
 		if (!colisiona) {
-			camara->UpdateCam(vel, vel2, arriaba, izqder);
+			if (sobre_bici) {
+				camara->UpdateCam(vel, vel2, arriaba, izqder, camaratipo);
+			}
+			else {
+				camara->UpdateCam(vel, vel2, arriaba, izqder, camaratipo);
+			}
+		
 			colisiona = false;
 
 		}
 		else {
 			camara->posCam = camara->posCam2;
+			camara->posCam3P = camara->posCam4;
 			colisiona = false;
 
 		}
@@ -475,7 +587,7 @@ public:
 			mostrar_mensaje = false;
 		}
 
-
+	
 		if (crossi) {
 			if (!sobrecruz) {
 				cruces_recogidas++;
@@ -483,25 +595,103 @@ public:
 				sobrecruz = true;
 			}
 			
+			if (cruces_recogidas == 10) {
+				wingame = true;
+			}
 				
 		}
 		else {
 			sobrecruz = false;
 		}
 
-		//camara->UpdateCam(vel, vel2, arriaba, izqder);
+		if (enemy_sound) {
+			near_enemy = true;
+		}
+		else{
+			near_enemy = false;
+		}
 
-		TurnOnDepth();
-		skydome->Update(camara->vista, camara->proyeccion);
-		TurnOffDepth();
-		float camPosXZ[2] = { camara->posCam.x, camara->posCam.z };
+		if (is_Walking == true && gameover == false) {
 
-		TurnOffDepth();
-		skydome->Render(camara->posCam);
-		TurnOnDepth();
-		terreno->Draw(camara->vista, camara->proyeccion);
+			if (!reproduciendo) {
+				m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
+				reproduciendo = true;
+			}
+
+		}
+		else {
+			m_XACT3.m_pSoundBank->Stop(walking, 0);
+			reproduciendo = false;
+		}
 
 
+		if (on_Bike == true) {
+
+			if (!reproduciendobike) {
+				m_XACT3.m_pSoundBank->Play(onbiki, 0, 0, 0);
+				reproduciendobike = true;
+			}
+
+		}
+		else {
+			m_XACT3.m_pSoundBank->Stop(onbiki, 0);
+			reproduciendobike = false;
+		}
+
+
+		if (near_enemy == true && gameover == false) {
+			if (!enemysound) {
+				m_XACT3.m_pSoundBank->Play(risa, 0, 0, 0);
+				enemysound = true;
+			}
+		}
+		else {
+			m_XACT3.m_pSoundBank->Stop(risa, 0);
+			enemysound = false;
+		}
+		
+		if (tiempo_dia <= 1.00 && !dianoche) {
+			tiempo_dia += 0.001;
+			TurnOnDepth();
+			Noche->Update(camara->vista, camara->proyeccion);
+			TurnOffDepth();
+			float camPosXZ[2] = { camara->posCam.x, camara->posCam.z, };
+
+			TurnOffDepth();
+			Noche->Render(camara->posCam);
+			TurnOnDepth();
+		
+
+		}
+		else {
+			dianoche = true;
+		}
+
+		if (tiempo_dia >= 0.00 && dianoche) {
+			tiempo_dia -= 0.001;
+
+			TurnOnDepth();
+			skydome->Update(camara->vista, camara->proyeccion);
+			TurnOffDepth();
+			float camPosXZ[2] = { camara->posCam.x, camara->posCam.z };
+
+			TurnOffDepth();
+
+			skydome->Render(camara->posCam);
+			TurnOnDepth();
+		}
+		else {
+			dianoche = false;
+		}
+
+		
+			float* PosPl = new float[3]{ cruz->getPosX(),10,cruz->getPosZ()};
+			float* cPl = new float[3]{ 0.0,1.0,0.0 };
+			terreno->setPospLight(PosPl);
+			terreno->setColorpLight(cPl);
+			terreno->setRangepLight(0.5);
+			terreno->setpointLight(true);
+			terreno->Draw(camara->vista, camara->proyeccion,1 , tiempo_dia);
 
 		//=====================================ARBOLES============================================================
 		//int i = 0;
@@ -515,7 +705,6 @@ public:
 		//}
 		//
 
-
 		billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
 			0, 60, 0, 2.5, false, uv1, uv2, uv3, uv4, frameBillboard);
 
@@ -523,20 +712,20 @@ public:
 			-40, -20, terreno->Superficie(-40, -20), 20, true);
 		//==========================================================================================================
 		//================CARGAR LOS MODELOS============================
-
+		model->setTimer(tiempo_dia);
 		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(model->getPosX(), model->getPosZ()), camara->posCam, 10.0f, 0, 'Z', .25);
-
-
+	
+		edificio->setTimer(tiempo_dia);
 		edificio->Draw(camara->vista, camara->proyeccion, terreno->Superficie(edificio->getPosX(), edificio->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 1);
-
-
+		
+		edificio2->setTimer(tiempo_dia);
 		edificio2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(edificio2->getPosX(), edificio2->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 2.5);
 
 
 
 		if (sobre_bici) {
-			bicicleta2->setPosX(camara->posCam.x);
-			bicicleta2->setPosZ(camara->posCam.z);
+			bicicleta2->setPosX(camara->posCam3P.x);
+			bicicleta2->setPosZ(camara->posCam3P.z);
 
 			bicicleta->setPosX(camara->posCam.x);
 			bicicleta->setPosZ(camara->posCam.z);
@@ -545,52 +734,83 @@ public:
 		}
 
 		if (sobre_bici) {
-			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta2->getPosX(), bicicleta2->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 0.50, true);
+			bicicleta2->setTimer(tiempo_dia);
+			bicicleta2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta2->getPosX(), bicicleta2->getPosZ()), camara->posCam, 10.0f, XM_PIDIV4 + XMConvertToRadians (rotacioncamera), 'Y', 0.50, true, camaratipo);
 		}
 		else {
-				bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX() +  bici2_x, bicicleta->getPosZ() + bici2_z), camara->posCam, 10.0f, XM_PIDIV2 + 90, 'Y', 0.70);
+			bicicleta->setTimer(tiempo_dia);
+			bicicleta->Draw(camara->vista, camara->proyeccion, terreno->Superficie(bicicleta->getPosX(), bicicleta->getPosZ()), camara->posCam, 10.0f, XM_PIDIV4 +XMConvertToRadians (90), 'Y', 0.70);
 
 		}
 
+		basura->setTimer(tiempo_dia);
 		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(basura->getPosX(), basura->getPosZ()), camara->posCam, 10.0f, 0, 'X', 0.05);
+
+		mesa->setTimer(tiempo_dia);
 		mesa->Draw(camara->vista, camara->proyeccion, terreno->Superficie(mesa->getPosX(), mesa->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 0.0045);
+
+
+
+		//cruz->setpointLight(true);
+		//float* PosPl = new float[3]{ cruz->getPosX(),10,cruz->getPosZ()};
+		//float* cPl = new float[3]{ 1.0,1.0,0.0 };
+		//cruz->setPospLight(PosPl);
+		//cruz->setColorpLight(cPl);
+		//cruz->setRangepLight(1.0f);
+		cruz->setTimer(tiempo_dia);
 		cruz->Draw(camara->vista, camara->proyeccion, terreno->Superficie(cruz->getPosX(), cruz->getPosZ()) + 5, camara->posCam, 10.0f, XM_PIDIV2 + angle, 'X', 0.005);
 
-	//	seguir_jugador(camara->getpoint(), enemigo->getposition(),enemigo);
-		enemigo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(enemigo->getPosX(), enemigo->getPosZ()), camara->posCam, 10.0f, XM_PIDIV2 + rotacioncamera, 'Y', 1.0, true);
+		enemigo->setTimer(tiempo_dia);
+		if (tiempo_inicio == 0.00) {
+			seguir_jugador(camara->getpoint(), enemigo->getposition(), enemigo);
+		}
+		enemigo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(enemigo->getPosX(), enemigo->getPosZ()), camara->hdveo, 10.0f, XM_PIDIV2 + angle, 'Y', 1.0, true);
+
+		fogata->setTimer(tiempo_dia);
 		fogata->Draw(camara->vista, camara->proyeccion, terreno->Superficie(fogata->getPosX(), fogata->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 2.0);;
 
 		//==============================================================
 
 		//GUI
-
+		if (gameover) {
+		//	TurnOnAlphaBlending();
+			gameovertext->DrawText(-0.50f, 0.40f, "Haz muerto", 0.03);
+			gameovertext->DrawText(-0.70f, -0.10f, "P para reintentar", 0.03);
+			gameovertext->DrawText(-0.90f, -0.40f, "Espacio para cerrar juego", 0.03);
+		//	TurnOnAlphaBlending();
+			gogui->Draw(-0.0, -0.0);
+		}
 		vida->Draw(0.4f, 0.7f);
 		TurnOnAlphaBlending();
+
+		if (tiempo_inicio > 0.00) {
+			inicio_gaming->DrawText(-0.85f, -0.0f, "Debes recolectar 10 cruces", 0.03);
+			inicio_gaming->DrawText(-0.85f, -0.20f, "Pero cuidado", 0.03);
+			inicio_gaming->DrawText(-0.85f, -0.40f, "Hay alguien acechandote", 0.03);
+			tiempo_inicio -= 0.0001;
+		}
+		else {
+			tiempo_inicio = 0.0;
+		}
 
 		if (subir_bici && mostrar_mensaje) {
 			texto->DrawText(-0.75f, -0.10f, "Pulsa E para subirte", 0.03);
 		}
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
+	//	texto->DrawText(0.25f, 0.3f, to_string(tiempo_inicio), 0.03);
+		//camara->hdveo.x
+		texto->DrawText(0.45f, 0.3f, to_string(rotacioncamera), 0.03);
+	
+		texto->DrawText(0.45f, 0.1f, to_string(XM_PIDIV4 * rotacioncamera), 0.03);
 
-		texto->DrawText(-0.75f, -0.60f, to_string(crossi), 0.03);
-		texto->DrawText(-0.75f, -0.40f, to_string(sobre_colision), 0.03);
+		texto->DrawText(0.45f, -0.1f, to_string(camara->hdveo.x), 0.03);
+
+		texto->DrawText(0.45f, -0.3f, to_string(camara->hdveo.z), 0.03);
+
+		TurnOffAlphaBlending();
 
 
-		if (is_Walking == true) {
-
-			if (!reproduciendo) {
-				m_XACT3.m_pSoundBank->Play(walking, 0, 0, 0);
-				reproduciendo = true;
-			}
-				
-		}
-		else {
-			m_XACT3.m_pSoundBank->Stop(walking, 0);
-			reproduciendo = false;
-		}
-
-      TurnOffAlphaBlending();
 
 		swapChain->Present( 1, 0 );
 	}

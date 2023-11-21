@@ -41,8 +41,23 @@ private:
 	ID3D11Buffer* viewCB;
 	ID3D11Buffer* projCB;
 	ID3D11Buffer* worldCB;
+	ID3D11Buffer* Time;
+	ID3D11Buffer* Opcion;
 	D3DXMATRIX viewMatrix;
 	D3DXMATRIX projMatrix;
+
+
+	//Pointlights
+ID3D11Buffer* PosPointLight;
+ID3D11Buffer* ColorPointLight;
+ID3D11Buffer* RangePointLight;
+ID3D11Buffer* EnablePointLight;
+
+float* pPointl = new float[3]{ 0.0, 0.0, 0.0 };
+float*  cPointl = new float[3]{ 0.0, 0.0, 0.0 };
+
+float rPointl = 0.0;
+bool enablePointlight = false;
 
 	int ancho, alto;
 	int anchoTexTerr, altoTexTerr;
@@ -76,6 +91,23 @@ public:
 		delete vertcol;
 		UnloadContent();
 	}
+
+	//Permitir si el modelo llevara una pointlight o no
+void setpointLight(bool setPl) {
+	this->enablePointlight = setPl;
+}
+//Coordenadas de la pointlight
+void setPospLight(float* setpPl) {
+	this->pPointl = setpPl;
+}
+//Que colores llevara la pointlight
+void setColorpLight(float* setcPl) {
+	this->cPointl = setcPl;
+}
+//cual sera el rango de iluminacion
+void setRangepLight(float setrPl) {
+	this->rPointl = setrPl;
+}
 
 	bool CompileD3DShader(WCHAR* filePath, char* entry, char* shaderModel, ID3DBlob** buffer)
 	{
@@ -298,6 +330,51 @@ public:
 			return false;
 		}
 
+	
+		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &Opcion);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
+
+		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &Time);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		} 
+
+//		constDesc.ByteWidth = sizeof(XMFLOAT3);
+
+		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &PosPointLight);
+
+	if (FAILED(d3dResult))
+	{
+		return false;
+	}
+
+	d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &ColorPointLight);
+
+	if (FAILED(d3dResult))
+	{
+		return false;
+	}
+
+	d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &RangePointLight);
+
+	if (FAILED(d3dResult))
+	{
+		return false;
+	}
+
+	d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &EnablePointLight);
+
+	if (FAILED(d3dResult))
+	{
+		return false;
+	}
+
 		//posicion de la camara
 		D3DXVECTOR3 eye = D3DXVECTOR3(0.0f, 100.0f, 200.0f);
 		//a donde ve
@@ -345,8 +422,33 @@ public:
 			}
 			delete alturaData ;
 		}
-		alturaData = 0;
 
+		if (Opcion)
+			Opcion->Release();
+		if (Time)
+			Time->Release();
+
+
+		if (PosPointLight)
+			PosPointLight->Release();
+
+		if (ColorPointLight)
+			ColorPointLight->Release();
+
+		if (RangePointLight)
+			RangePointLight->Release();
+
+		if (EnablePointLight)
+			EnablePointLight->Release();
+		
+		PosPointLight = 0;
+		ColorPointLight = 0;
+		RangePointLight = 0;
+		EnablePointLight = 0;
+
+
+		alturaData = 0;
+		Time = 0;
 		colorMapSampler = 0;
 		colorMap = 0;
 		VertexShaderVS = 0;
@@ -356,17 +458,19 @@ public:
 		indexBuffer = 0;
 		viewCB = 0;
 		projCB = 0;
-		worldCB = 0;
+		worldCB = 0; 
+		Opcion = 0;
 	}
 
 	void Update(float dt)
 	{
 	}
 
-	void Draw(D3DXMATRIX vista, D3DXMATRIX proyeccion)
+	void Draw(D3DXMATRIX vista, D3DXMATRIX proyeccion, int dianoche = 1, float time = 0.00)
 	{
 		static float rotation = 0.0f;
 		rotation += 0.01;		
+		
 
 		//paso de datos, es decir cuanto es el ancho de la estructura
 		unsigned int stride = sizeof( VertexComponent );
@@ -389,6 +493,7 @@ public:
 		d3dContext->PSSetShaderResources( 0, 1, &colorMap );
 		d3dContext->PSSetShaderResources( 1, 1, &colorMap2 );
 		d3dContext->PSSetShaderResources( 2, 1, &blendMap );
+	
 		d3dContext->PSSetSamplers( 0, 1, &colorMapSampler );
 
 		//mueve la camara
@@ -406,10 +511,25 @@ public:
 		d3dContext->UpdateSubresource( worldCB, 0, 0, &worldMat, 0, 0 );
 		d3dContext->UpdateSubresource( viewCB, 0, 0, &vista, 0, 0 );
 		d3dContext->UpdateSubresource( projCB, 0, 0, &proyeccion, 0, 0 );
+		d3dContext->UpdateSubresource( Opcion, 0, 0, &dianoche, 0, 0);
+		d3dContext->UpdateSubresource( Time, 0, 0, &time, 0, 0);
+
+		d3dContext->UpdateSubresource(PosPointLight, 0, 0, &pPointl, 0, 0);
+		d3dContext->UpdateSubresource(ColorPointLight, 0, 0, &cPointl, 0, 0);
+		d3dContext->UpdateSubresource(RangePointLight, 0, 0, &rPointl, 0, 0);
+		d3dContext->UpdateSubresource(EnablePointLight, 0, 0, &enablePointlight, 0, 0);
+
 		//le pasa al shader los buffers
 		d3dContext->VSSetConstantBuffers( 0, 1, &worldCB );
 		d3dContext->VSSetConstantBuffers( 1, 1, &viewCB );
 		d3dContext->VSSetConstantBuffers( 2, 1, &projCB );
+		d3dContext->PSSetConstantBuffers( 4, 1, &Opcion);
+		d3dContext->PSSetConstantBuffers(5, 1, &Time);
+
+		d3dContext->PSSetConstantBuffers(6, 1, &PosPointLight);
+		d3dContext->PSSetConstantBuffers(7, 1, &ColorPointLight);
+		d3dContext->PSSetConstantBuffers(8, 1, &RangePointLight);
+		d3dContext->PSSetConstantBuffers(9, 1, &EnablePointLight);
 		//cantidad de trabajos
 		int cuenta = (anchoTexTerr - 1) * (altoTexTerr - 1) * 6;
 		d3dContext->DrawIndexed( cuenta, 0, 0 );

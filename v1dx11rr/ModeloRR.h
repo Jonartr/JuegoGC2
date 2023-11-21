@@ -13,6 +13,8 @@
 #include <iostream>
 #include "loadModel.h"
 
+
+
 using namespace std;
 
 class ModeloRR {
@@ -54,6 +56,21 @@ private:
 	D3DXMATRIX viewMatrix;
 	D3DXMATRIX projMatrix;
 
+
+	//Pointlights
+	//ID3D11Buffer* PosPointLight;
+	//ID3D11Buffer* ColorPointLight;
+	//ID3D11Buffer* RangePointLight;
+	//ID3D11Buffer* EnablePointLight;
+
+	//XMFLOAT3 pPointl = XMFLOAT3(0.0,0.0,0.0);
+	//XMFLOAT3 cPointl = XMFLOAT3(0.0, 0.0, 0.0);
+	//float rPointl = 0.0;
+	//bool enablePointlight = false;
+
+
+	ID3D11Buffer* Time;
+
 	ID3D11Buffer* cameraPosCB;
 	XMFLOAT3 camPos;
 	ID3D11Buffer* specForceCB;
@@ -63,6 +80,9 @@ private:
 	int anchoTexTerr, altoTexTerr;
 	float anchof, altof;
 	float deltax, deltay;
+	float timer;
+
+	
 
 	ID3D11Device* d3dDevice;
 	ID3D11DeviceContext* d3dContext;
@@ -93,6 +113,8 @@ public:
 		UnloadContent();
 	}
 
+
+
 	void setPosX(float posX) {
 		this->posX = posX;
 	}
@@ -100,6 +122,27 @@ public:
 	void setPosZ(float posZ) {
 		this->posZ = posZ;
 	}
+
+	void setTimer(float time) {
+		this->timer = time;
+	}
+	////Permitir si el modelo llevara una pointlight o no
+	//void setpointLight(bool setPl) {
+	//	this->enablePointlight = setPl;
+	//}
+	////Coordenadas de la pointlight
+	//void setPospLight(float* setpPl) {
+	//	this->pPointl = setpPl;
+	//}
+	////Que colores llevara la pointlight
+	//void setColorpLight(float* setcPl) {
+	//	this->cPointl = setcPl;
+	//}
+	////cual sera el rango de iluminacion
+	//void setRangepLight(float setrPl) {
+	//	this->rPointl = setrPl;
+	//}
+
 
 	float getPosX() {
 		return this->posX;
@@ -296,8 +339,20 @@ public:
 			return false;
 		}
 
+		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &Time);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
+
 		constDesc.ByteWidth = sizeof(XMFLOAT4);
 		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &cameraPosCB);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
 
 		d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &specForceCB);
 
@@ -305,6 +360,34 @@ public:
 		{
 			return false;
 		}
+
+		//d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &PosPointLight);
+
+		//if (FAILED(d3dResult))
+		//{
+		//	return false;
+		//}
+
+		//d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &ColorPointLight);
+
+		//if (FAILED(d3dResult))
+		//{
+		//	return false;
+		//}
+
+		//d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &RangePointLight);
+
+		//if (FAILED(d3dResult))
+		//{
+		//	return false;
+		//}
+
+		//d3dResult = d3dDevice->CreateBuffer(&constDesc, 0, &EnablePointLight);
+
+		//if (FAILED(d3dResult))
+		//{
+		//	return false;
+		//}
 
 		//posicion de la camara
 		D3DXVECTOR3 eye = D3DXVECTOR3(0.0f, 100.0f, 200.0f);
@@ -350,8 +433,28 @@ public:
 			cameraPosCB->Release();
 		if (specForceCB)
 			specForceCB->Release();
-		
 
+		if (Time)
+			Time->Release();
+
+		//if (PosPointLight)
+		//	PosPointLight->Release();
+
+		//if (ColorPointLight)
+		//	ColorPointLight->Release();
+
+		//if (RangePointLight)
+		//	RangePointLight->Release();
+
+		//if (EnablePointLight)
+		//	EnablePointLight->Release();
+		//
+		//PosPointLight = 0;
+		//ColorPointLight = 0;
+		//RangePointLight = 0;
+		//EnablePointLight = 0;
+
+		Time = 0;
 		colorMapSampler = 0;
 		colorMap = 0;
 		specMap = 0;
@@ -372,12 +475,14 @@ public:
 
 	}
 
+
 	void Draw(D3DXMATRIX vista, D3DXMATRIX proyeccion, float ypos, D3DXVECTOR3 posCam,
-		float specForce, float rot, char angle, float scale, bool seguircamara = false, bool third_person = false)
+		float specForce, float rot, char angle, float scale, bool seguircamara = false
+		,bool third_person = false )
 	{
 		static float rotation = 0.0f;
 		rotation += 0.01;
-
+		
 		//paso de datos, es decir cuanto es el ancho de la estructura
 		unsigned int stride = sizeof(VertexObj);
 		unsigned int offset = 0;
@@ -408,12 +513,15 @@ public:
 		D3DXMATRIX rotationMat;
 		D3DXMatrixRotationYawPitchRoll(&rotationMat, 0.0f, 0.0f, 0.0f);
 		D3DXMATRIX translationMat;
+		D3DXMatrixTranslation(&translationMat, posX, ypos, posZ);
 
-	//D3DXMATRIX seguircamara;
-
-	
-
-
+	    D3DXMATRIX seguir_camara;
+		if (third_person) {
+			D3DXMatrixTranslation(&seguir_camara, posX, ypos, posZ - 10);
+		}
+		else {
+			D3DXMatrixTranslation(&seguir_camara, 0.0, 0.0, 0.0);
+		}
 		
 		if(angle == 'X')
 			D3DXMatrixRotationX(&rotationMat, rot);
@@ -429,15 +537,14 @@ public:
 		D3DXMatrixScaling(&scaleMat, scale,scale * 1.65,scale);
 
 
+		D3DXMATRIX 	worldMat = rotationMat * scaleMat * translationMat;
+
 		if (seguircamara) {
-			D3DXMatrixTranslation(&translationMat, posX + 0, ypos, posZ - 2.75);
 
-		}
-		else {
-			D3DXMatrixTranslation(&translationMat, posX, ypos, posZ);
+			worldMat = rotationMat * seguir_camara *scaleMat * translationMat;
 		}
 
-		D3DXMATRIX worldMat = rotationMat * scaleMat * translationMat;
+	
 		D3DXMatrixTranspose(&worldMat, &worldMat);
 		//actualiza los buffers del shader
 		d3dContext->UpdateSubresource(worldCB, 0, 0, &worldMat, 0, 0);
@@ -445,16 +552,28 @@ public:
 		d3dContext->UpdateSubresource(projCB, 0, 0, &proyeccion, 0, 0);
 		d3dContext->UpdateSubresource(cameraPosCB, 0, 0, &camPos, 0, 0);
 		d3dContext->UpdateSubresource(specForceCB, 0, 0, &specForce, 0, 0);
+		d3dContext->UpdateSubresource(Time, 0, 0, &timer, 0, 0);
+
+		//d3dContext->UpdateSubresource(PosPointLight, 0, 0, &pPointl, 0, 0);
+		//d3dContext->UpdateSubresource(ColorPointLight, 0, 0, &cPointl, 0, 0);
+		//d3dContext->UpdateSubresource(RangePointLight, 0, 0, &rPointl, 0, 0);
+		//d3dContext->UpdateSubresource(EnablePointLight, 0, 0, &enablePointlight, 0, 0);
 		//le pasa al shader los buffers
 		d3dContext->VSSetConstantBuffers(0, 1, &worldCB);
 		d3dContext->VSSetConstantBuffers(1, 1, &viewCB);
 		d3dContext->VSSetConstantBuffers(2, 1, &projCB);
 		d3dContext->VSSetConstantBuffers(3, 1, &cameraPosCB);
 		d3dContext->VSSetConstantBuffers(4, 1, &specForceCB);
+		d3dContext->PSSetConstantBuffers(6, 1, &Time);
+		//
+		//d3dContext->PSSetConstantBuffers(7, 1, &PosPointLight);
+		//d3dContext->PSSetConstantBuffers(8, 1, &ColorPointLight);
+		//d3dContext->PSSetConstantBuffers(9, 1, &RangePointLight);
+		//d3dContext->PSSetConstantBuffers(5, 1, &EnablePointLight);
 		//cantidad de trabajos
 		
 		d3dContext->Draw(m_ObjParser.m_nVertexCount, 0);
-
+		
 
 	}
 };

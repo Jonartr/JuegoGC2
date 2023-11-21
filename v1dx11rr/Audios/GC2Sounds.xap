@@ -16,8 +16,8 @@ Global Settings
     Header File = GC2Sounds.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 540108736;
-    Last Modified High = 31070072;
+    Last Modified Low = 3930634039;
+    Last Modified High = 31071046;
 
     Category
     {
@@ -228,12 +228,12 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 540128682;
-    PC Bank Last Modified High = 31070072;
-    Header Last Modified Low = 1277855763;
-    Header Last Modified High = 31070077;
-    Bank Last Revised Low = 422430031;
-    Bank Last Revised High = 31070072;
+    PC Bank Last Modified Low = 3930818652;
+    PC Bank Last Modified High = 31071046;
+    Header Last Modified Low = 753085035;
+    Header Last Modified High = 31071065;
+    Bank Last Revised Low = 3564038911;
+    Bank Last Revised High = 31071046;
 
     Wave
     {
@@ -349,6 +349,75 @@ Wave Bank
             Last Modified High = 31070065;
         }
     }
+
+    Wave
+    {
+        Name = Echo4b;
+        File = D:\Universidad\Graficas 2\TerrenoSkyBillModGC2\v1dx11rr\Audios\Echo4b.wav;
+        Build Settings Last Modified Low = 3353102778;
+        Build Settings Last Modified High = 31071046;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 22050;
+            Bits Per Sample = 1;
+            Play Region Offset = 78;
+            Play Region Length = 118272;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 4021471869;
+            Last Modified High = 31071004;
+        }
+    }
+
+    Wave
+    {
+        Name = Bike-Sound-Effect-Bicycle-Sound-Effect-Noise-Bike;
+        File = D:\Universidad\Graficas 2\TerrenoSkyBillModGC2\v1dx11rr\Audios\Bike-Sound-Effect-Bicycle-Sound-Effect-Noise-Bike.wav;
+        Build Settings Last Modified Low = 3425408860;
+        Build Settings Last Modified High = 31071046;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 48000;
+            Bits Per Sample = 1;
+            Play Region Offset = 164;
+            Play Region Length = 2590236;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 2616389162;
+            Last Modified High = 31071003;
+        }
+    }
+
+    Wave
+    {
+        Name = BalloonBoyJumpscare;
+        File = D:\Universidad\Graficas 2\TerrenoSkyBillModGC2\v1dx11rr\Audios\BalloonBoyJumpscare.wav;
+        Build Settings Last Modified Low = 3467835001;
+        Build Settings Last Modified High = 31071046;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 78;
+            Play Region Length = 379648;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 4049128503;
+            Last Modified High = 31071004;
+        }
+    }
 }
 
 Sound Bank
@@ -358,8 +427,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1277855763;
-    Bank Last Modified High = 31070077;
+    Bank Last Modified Low = 753085035;
+    Bank Last Modified High = 31071065;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -600,6 +669,148 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = Echo4b;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Loop Count = 255;
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = uwu;
+                    Bank Index = 0;
+                    Entry Name = Echo4b;
+                    Entry Index = 5;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = Bike-Sound-Effect-Bicycle-Sound-Effect-Noise-Bike;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = uwu;
+                    Bank Index = 0;
+                    Entry Name = Bike-Sound-Effect-Bicycle-Sound-Effect-Noise-Bike;
+                    Entry Index = 6;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = BalloonBoyJumpscare;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = uwu;
+                    Bank Index = 0;
+                    Entry Name = BalloonBoyJumpscare;
+                    Entry Index = 7;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = 1-28-Beware-the-Forest_s-Mushrooms;
@@ -695,6 +906,66 @@ Sound Bank
         {
             Name = Sonido-De-Fogata;
             Index = 4;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = Grito;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = BalloonBoyJumpscare;
+            Index = 7;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = Bici;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Bike-Sound-Effect-Bicycle-Sound-Effect-Noise-Bike;
+            Index = 6;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = Risas;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Echo4b;
+            Index = 5;
             Weight Min = 0;
             Weight Max = 255;
         }

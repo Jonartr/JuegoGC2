@@ -13,6 +13,7 @@ public:
 	D3DXVECTOR3 posCam;
 	D3DXVECTOR3 posCam2;
 	D3DXVECTOR3 posCam3P;
+	D3DXVECTOR3 posCam4;
 	D3DXVECTOR3 hdveo;
 	D3DXVECTOR3 hdvoy;
 	D3DXVECTOR3 refUp;
@@ -53,11 +54,12 @@ public:
 		
 	}
 
-	D3DXMATRIX UpdateCam(float vel,float vel2, float arriaba, float izqder, bool third_person =false)
+	D3DXMATRIX UpdateCam(float vel,float vel2, float arriaba, float izqder, bool third_person)
 	{
 		//Guardamos la wea fome de la wea camara
 
 		posCam2 = posCam;
+		posCam4 = posCam3P;
 		D3DXVECTOR4 tempo;
 		D3DXQUATERNION quatern; //quaternion temporal para la camara
 		D3DXMATRIX giraUp, giraRight; //matrices temporales para los giros

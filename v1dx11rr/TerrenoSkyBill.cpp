@@ -181,36 +181,63 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             char keyboardData[256];
             m_pKeyboardDevice->GetDeviceState(sizeof(keyboardData), (void*)&keyboardData);
 
-            if (keyboardData[DIK_S] & 0x80) {
-                dxrr->vel = -5.f;
-                dxrr->is_Walking = true;
-        
-            }
-            else if (keyboardData[DIK_W] & 0x80) {
-                dxrr->vel = 5.f;
-                dxrr->is_Walking = true;
-           
-            }
-            else  if (keyboardData[DIK_A] & 0x80) {
-                dxrr->vel2 = 5.f;
-                dxrr->is_Walking = true;
-           
-            }
-            else if (keyboardData[DIK_D] & 0x80) {
-                dxrr->vel2 = -5.f;
-                dxrr->is_Walking = true;
-           
-            }
-            else {
-                dxrr->is_Walking = false;
-       
-            }
+            if (dxrr->gameover == false) {
+                if (keyboardData[DIK_S] & 0x80) {
+                    dxrr->vel = -5.f;
+                    if (dxrr->sobre_bici) {
+                        dxrr->on_Bike = true;
+                    }
+                    else {
+                        dxrr->is_Walking = true;
+                        dxrr->on_Bike = false;
+                    }
+
+
+                }
+                else if (keyboardData[DIK_W] & 0x80) {
+                    dxrr->vel = 5.f;
+                    if (dxrr->sobre_bici) {
+                        dxrr->on_Bike = true;
+                    }
+                    else {
+                        dxrr->is_Walking = true;
+
+                    }
+
+                }
+                else  if (keyboardData[DIK_A] & 0x80) {
+                    dxrr->vel2 = 5.f;
+                    if (dxrr->sobre_bici) {
+                        dxrr->on_Bike = true;
+                    }
+                    else {
+                        dxrr->is_Walking = true;
+                    }
+
+                }
+                else if (keyboardData[DIK_D] & 0x80) {
+                    dxrr->vel2 = -5.f;
+                    if (dxrr->sobre_bici) {
+                        dxrr->on_Bike = true;
+                    }
+                    else {
+                        dxrr->is_Walking = true;
+                    }
+
+                }
+                else {
+                    dxrr->is_Walking = false;
+                    dxrr->on_Bike = false;
+                }
+             }
+
+          
 
 
 
-            //if (keyboardData[DIK_I] & 0x80) {
-            //    dxrr->movX += 0.5;
-            //}
+            if (keyboardData[DIK_I] & 0x80) {
+                dxrr->dianoche = !dxrr->dianoche;
+            }
             //else if (keyboardData[DIK_J] & 0x80) {
             //    dxrr->movX -= 0.5;
             //}
@@ -230,14 +257,16 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 
 
-            if (keyboardData[DIK_E] & 0x80 && dxrr->subir_bici == true && dxrr->sobre_bici == false) {
+            if (keyboardData[DIK_E] & 0x80 && dxrr->subir_bici == true && dxrr->sobre_bici == false&& dxrr->gameover==false) {
                 dxrr->sobre_bici = true;
+                dxrr->camaratipo = true;
               //  dxrr->subir_bici = false;
             }
             
-            else if (keyboardData[DIK_E] & 0x80 && dxrr->sobre_bici == true && dxrr->subir_bici == true) {
+            else if (keyboardData[DIK_E] & 0x80 && dxrr->sobre_bici == true && dxrr->subir_bici == true && dxrr->gameover == false) {
                 dxrr->sobre_bici = false;
                 dxrr->subir_bici = false;
+                dxrr->camaratipo = false;
             }
 
             if (keyboardData[DIK_ESCAPE] & 0x80) {
@@ -245,7 +274,12 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 PostQuitMessage(0);
                 return 0;
             }
-
+            if (keyboardData[DIK_P] & 0x80) {
+                //reiniciamos parametros nuevamente
+                dxrr->gameover = false;
+                dxrr->reinicio_juego = true;
+                
+            }
             DIMOUSESTATE mouseData;
             m_pMouseDevice->GetDeviceState(sizeof(mouseData), (void*)&mouseData);
 

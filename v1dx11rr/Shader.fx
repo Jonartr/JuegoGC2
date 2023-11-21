@@ -17,6 +17,40 @@ cbuffer cbChangeOnResize : register(b2)
 {
 	matrix projMatrix;
 };
+//Esta ya no se usa de momento
+cbuffer cbDianoche : register(b4)
+{
+    int opcion;
+};
+//Intervalo de 0 a 1 para alternar la luz del terreno
+cbuffer cbefectodianoche : register(b5)
+{
+    float tiempo;
+};
+
+//COORDENADAS DE LAS POINT LIGHTS
+cbuffer cbPosPointlight : register(b6)
+{
+    float3 CoordPl;
+};
+
+//EL COLOR QUE LLEVARA
+cbuffer cbcolorPointlight : register(b7)
+{
+    float3 ColorPl;
+};
+
+//RANGO DE ILUMINACION
+cbuffer cbRangePointlight : register(b8)
+{
+    float Range;
+};
+
+//SABER SI EL OBJETO LLEVARA UNA LUZ POINT LIGHT O NO
+cbuffer cbEnablePointLight : register(b9)
+{
+    bool Enable;
+};
 
 struct VS_Input
 {
@@ -58,21 +92,59 @@ float4 PS_Main(PS_Input pix) : SV_TARGET
 {
 	float4 fColor = float4(1,0,0,1);
 
-    float3 ambient = float3(0.2f, 0.2f, 0.2f);
+    float3 ambient ;
+    float3 DiffuseDirection ;
+    float4 DiffuseColor;
+	
+    float3 toLight;
+    float distance;
+    float3 lightDirection;
+    float attenuation;
+    float3 pointLightContribution;
+    float diffuseFactor;
+    float3 diffuseColor;
+
+        ambient = lerp(float3(0.1f, 0.1f, 0.03f), (0.5f, 0.5f, 0.5f), tiempo);
+         DiffuseDirection = float3(0.5f, -1.0f, 0.0f);
+	
+		 DiffuseColor = float4(ambient, 1.0f);
+	
 
 	float4 text = colorMap.Sample(colorSampler, pix.tex0);
 	float4 text2 = colorMap2.Sample(colorSampler, pix.tex0);
 	float4 alphaBlend = blendMap.Sample(colorSampler, pix.blendTex);
 	float4 textf = (text * alphaBlend) + ((1.0 - alphaBlend) * text2);
 
-	float3 DiffuseDirection = float3(0.5f, -1.0f, 1.0f);
-	float4 DiffuseColor = float4(0.0f, 0.0f, 0.2f, 1.0f);
+	
 
 	float3 diffuse = dot(-DiffuseDirection, pix.normal);
 	diffuse = saturate(diffuse*DiffuseColor.rgb);
 	diffuse = saturate(diffuse + ambient);
+	
+    //if (Enable == true)
+    //{
+        toLight = CoordPl - pix.pos.xyz;
+        distance = length(toLight);
+        lightDirection = normalize(toLight);
+
+     //Calcular la atenuación basada en la distancia
+        attenuation = saturate(1.0 - distance / Range);
+
+     //Calcular la contribución de la luz puntual
+        pointLightContribution = ColorPl * attenuation;
+
+     //Calcular la componente difusa de la luz puntual
+        diffuseFactor = saturate(dot(pix.normal, lightDirection));
+        diffuseColor = pointLightContribution * DiffuseColor.rgb * diffuseFactor;
+    //}
+    //else
+    //{
+    //    diffuseColor = ambient;
+    //}
+	
 
 	fColor = float4(textf.rgb * diffuse, 1.0f);
+    fColor.rgb += diffuseColor;
 
-	return fColor;
+    return fColor;
 }

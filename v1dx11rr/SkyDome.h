@@ -34,21 +34,27 @@ private:
 	ID3D11Buffer* indexBuffer;
 
 	ID3D11ShaderResourceView* textura;
+	//ID3D11ShaderResourceView* textura2;
 	ID3D11SamplerState* texSampler;
 
 	ID3D11Buffer* matrixBufferCB;
+
+//	ID3D11Buffer* Opciones;
 	MatrixType* matrices;
 
 	SkyComponent* vertices;
 	int slices, stacks, cantIndex;
 	short* indices;
 	float radio;
+	/*WCHAR* diffuseTex2;*/
+	ID3D11Buffer* Tiempo;
+	float timer;
 	ID3D11Device** d3dDevice;
 	ID3D11DeviceContext** d3dContext;
 
 public:
 	SkyDome(int slices, int stacks, float radio, ID3D11Device** d3dDevice,
-		ID3D11DeviceContext** d3dContext, WCHAR* diffuseTex)
+		ID3D11DeviceContext** d3dContext, WCHAR* diffuseTex/*, WCHAR* diffuseTex2*/)
 	{
 		this->slices = slices;
 		this->stacks = stacks;
@@ -57,12 +63,18 @@ public:
 		vertices = NULL;
 		this->d3dDevice = d3dDevice;
 		this->d3dContext = d3dContext;
-		LoadContent(diffuseTex);
+		LoadContent(diffuseTex/*, diffuseTex2*/);
 	}
 
 	~SkyDome()
 	{
 		UnloadContent();
+	}
+
+
+
+	void settimer(float time) {
+		this->timer = time;
 	}
 
 
@@ -91,7 +103,7 @@ public:
 		return true;
 	}
 
-	bool LoadContent(WCHAR* diffuseTex)
+	bool LoadContent(WCHAR* diffuseTex/*, WCHAR* diffuseTex_2*/)
 	{
 		HRESULT d3dResult;
 
@@ -198,11 +210,13 @@ public:
 		creaIndices();
 
 		d3dResult = D3DX11CreateShaderResourceViewFromFile((*d3dDevice), diffuseTex, 0, 0, &textura, 0);
+	/*	d3dResult = D3DX11CreateShaderResourceViewFromFile((*d3dDevice), diffuseTex_2, 0, 0, &textura2, 0)*/;
 
 		if (FAILED(d3dResult))
 		{
 			return false;
 		}
+
 
 		D3D11_SAMPLER_DESC colorMapDesc;
 		ZeroMemory(&colorMapDesc, sizeof(colorMapDesc));
@@ -234,6 +248,14 @@ public:
 		{
 			return false;
 		}
+
+		d3dResult = (*d3dDevice)->CreateBuffer(&constDesc, 0, &Tiempo);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
+
 		matrices = new MatrixType;
 
 		return true;
@@ -257,7 +279,12 @@ public:
 			indexBuffer->Release();
 		if (matrixBufferCB)
 			matrixBufferCB->Release();
+		/*if (Opciones)
+			Opciones->Release();*/
+	/*	if (textura2)
+			textura2->Release();
 
+		textura2 = 0;*/
 		texSampler = 0;
 		textura = 0;
 		solidColorVS = 0;
@@ -266,6 +293,7 @@ public:
 		vertexBuffer = 0;
 		indexBuffer = 0;
 		matrixBufferCB = 0;
+	//	Opciones = 0;
 
 		return true;
 	}
@@ -276,7 +304,7 @@ public:
 		matrices->projMatrix = projection;
 	}
 
-	void Render(D3DXVECTOR3 trans)
+	void Render(D3DXVECTOR3 trans/*, int dianoche = 1*/)
 	{
 		if (d3dContext == 0)
 			return;
@@ -292,6 +320,7 @@ public:
 		(*d3dContext)->VSSetShader(solidColorVS, 0, 0);
 		(*d3dContext)->PSSetShader(solidColorPS, 0, 0);
 		(*d3dContext)->PSSetShaderResources(0, 1, &textura);
+	/*	(*d3dContext)->PSSetShaderResources(1, 1, &textura2);*/
 		(*d3dContext)->PSSetSamplers(0, 1, &texSampler);
 
 		D3DXMATRIX worldMat;
@@ -300,7 +329,11 @@ public:
 		matrices->worldMatrix = worldMat;
 
 		(*d3dContext)->UpdateSubresource(matrixBufferCB, 0, 0, matrices, sizeof(MatrixType), 0);
+		(*d3dContext)->UpdateSubresource(Tiempo, 0, 0, &timer,0, 0);
+		//(*d3dContext)->UpdateSubresource(Opciones, 0, 0, &dianoche,0 , 0);
 		(*d3dContext)->VSSetConstantBuffers(0, 1, &matrixBufferCB);
+		(*d3dContext)->PSSetConstantBuffers(2, 1, &Tiempo);
+
 
 		(*d3dContext)->DrawIndexed(cantIndex, 0, 0);
 	}
