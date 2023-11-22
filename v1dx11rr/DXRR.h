@@ -55,7 +55,7 @@ public:
 	SkyDome *skydome;
 	SkyDome* Noche;
 	BillboardRR *billboard;
-	BillboardRR* arbol;
+	BillboardRR* fantasma2;
 	BillboardRR* fantasma;
 	BillboardRR* Fondo;
 	Camara *camara;
@@ -150,6 +150,7 @@ public:
 
 	//Posiciona al enemigo en una de las 4 esquinas
 	void set_Posenemigo() {
+		srand(time(NULL));
 		int x = 1 + rand() % (5 - 1);
 
 		switch (x)
@@ -258,9 +259,10 @@ public:
 		Tumba4 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", -90, -180);
 		Tumba5 = new ModeloRR(d3dDevice, d3dContext, "MODELOS/Tumba/Gravestone_Original.obj", L"MODELOS/Tumba/Grave.png", L"MODELOS/Tumba/Grave_AO.png", -150, -180);
 
-		arbol = new BillboardRR(L"Assets/Billboards/fuego-anim.png", L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
+//		arbol = new BillboardRR(L"Assets/Billboards/fuego-anim.png", L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
 		Fondo = new BillboardRR(L"Assets/Materiales/bosquecito.jpg", L"NormalMap.png", d3dDevice, d3dContext, 100);
 		fantasma = new BillboardRR(L"Assets/Billboards/Zombiehand.png", L"Assets/Billboards/ZombiehandN.png", d3dDevice, d3dContext, 0.5);
+		fantasma2 = new BillboardRR(L"Assets/Billboards/ghost.png", L"Assets/Billboards/ghostN.png", d3dDevice, d3dContext, 0.5);
 
 
 		//========================MODELOS ========================================
@@ -304,7 +306,7 @@ public:
 		Wingui = new GUI(d3dDevice, d3dContext, 3, 3, L"Win.jpg");
 
 
-		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,0.0f,1.0f,1.0f));
+		texto = new Text(d3dDevice, d3dContext, 9, 3, L"Assets/Materiales/font_2.png",XMFLOAT4(1.0f,0.0f,0.0f,1.0f));
 		gameovertext = new Text(d3dDevice, d3dContext, 8, 2.65, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		inicio_gaming = new Text(d3dDevice, d3dContext, 4.5, 1.5, L"Assets/Materiales/font_2.png", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -847,6 +849,7 @@ public:
 
 
 		if (near_enemy == true && gameover == false && wingame == false) {
+			
 			if (!enemysound) {
 				m_XACT3.m_pSoundBank->Play(risa, 0, 0, 0);
 				enemysound = true;
@@ -912,7 +915,31 @@ public:
 
 
 		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
-			Tumba3->getPosX(), Tumba3->getPosZ(), terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()), 0.5, true);
+			Tumba1->getPosX(), Tumba1->getPosZ()+5, terreno->Superficie(Tumba1->getPosX(), Tumba1->getPosZ()), 2, true);
+
+		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			Tumba2->getPosX(), Tumba2->getPosZ()+5, terreno->Superficie(Tumba2->getPosX(), Tumba2->getPosZ()), 2, true);
+
+		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			Tumba3->getPosX(), Tumba3->getPosZ()+5, terreno->Superficie(Tumba3->getPosX(), Tumba3->getPosZ()), 2, true);
+
+		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			Tumba4->getPosX(), Tumba4->getPosZ()+5, terreno->Superficie(Tumba4->getPosX(), Tumba4->getPosZ()), 2, true);
+
+		fantasma->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			Tumba5->getPosX(), Tumba5->getPosZ()+5, terreno->Superficie(Tumba5->getPosX(), Tumba5->getPosZ()), 2, true);
+		//
+		fantasma2->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			-220, -220 , terreno->Superficie(-220, -220) + 3, 2, true);
+
+		fantasma2->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			220,-220, terreno->Superficie(220, -220)+ 3, 2, true);
+
+		fantasma2->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			-220, 220, terreno->Superficie(-220, 220)+ 3, 2, true);
+
+		fantasma2->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			220, 220, terreno->Superficie(220, 220) + 3, 2, true);
 
 		//arbol->Draw(camara->vista, camara->proyeccion, camara->posCam,
 		//	-40, -20, terreno->Superficie(-40, -20), 20, true);
@@ -962,8 +989,8 @@ public:
 		Tumba4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba4->getPosX(), Tumba4->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
 		Tumba5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(Tumba5->getPosX(), Tumba5->getPosZ()), camara->posCam, 10.0f, XM_PI + 90, 'Y', 0.5);
 
-		basura->setTimer(tiempo_dia);
-		basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(basura->getPosX(), basura->getPosZ()), camara->posCam, 10.0f, 0, 'X', 0.05);
+	//	basura->setTimer(tiempo_dia);
+	//	basura->Draw(camara->vista, camara->proyeccion, terreno->Superficie(basura->getPosX(), basura->getPosZ()), camara->posCam, 10.0f, 0, 'X', 0.05);
 
 		mesa->setTimer(tiempo_dia);
 		mesa->Draw(camara->vista, camara->proyeccion, terreno->Superficie(mesa->getPosX(), mesa->getPosZ()), camara->posCam, 10.0f, 0, 'Z', 0.0045);
@@ -1059,6 +1086,10 @@ public:
 		}
 
 		texto->DrawText(0.55f, 0.7f, to_string(cruces_recogidas), 0.03);
+
+		if (near_enemy) {
+			texto->DrawText(-0.75f, 0.6f, "Enemigo Cerca!!", 0.03);
+		}
 
 		TurnOffAlphaBlending();
 
